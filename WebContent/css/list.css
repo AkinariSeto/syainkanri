@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+.logout {
+	text-align: right;
+	margin-right: 30px;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin: 0 40px 0 auto;
+}
+
+table {
+	width: 100%;
+	margin-top: 20px;
+}
+
+th {
+    background-color: #DDFFFF;
+}
+
+td{
+	text-align: center;
+}
