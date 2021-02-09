@@ -42,7 +42,7 @@ input {
 
 .button {
     text-align: center;
-    /* display: flex; */
+    margin-top: 20px;
 }
 button{
     width: 90px;

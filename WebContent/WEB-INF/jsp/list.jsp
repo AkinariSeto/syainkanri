@@ -8,10 +8,10 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/list.css">
-<title>社員一覧</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/list.css">
+	<title>社員一覧</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
 		<a href="./Logout">ログアウト</a>
 	</div>
 	<h1>社員一覧</h1>
-	<form action="ListRegistServlet" method="get">
+	<form action="ListRegisterServlet" method="get">
 		<button type="submit">新規登録</button>
 	</form>
 	<table border="1">
@@ -49,15 +49,33 @@
 		</tr>
 		<c:forEach var="InfoBeanList" items="${InfoBeanList}">
 			<tr>
-				<td><c:out value="${InfoBeanList.employeeId}" /></td>
-				<td><c:out value="${InfoBeanList.abbreviation}" /></td>
-				<td><c:out value="${InfoBeanList.department}" /></td>
-				<td><c:out value="${InfoBeanList.name}" /></td>
-				<td><c:out value="${InfoBeanList.nameHiragana}" /></td>
-				<td><c:out value="${InfoBeanList.birthday}" /></td>
-				<td><c:out value="${InfoBeanList.businessManager}" /></td>
-				<td><c:out value="${InfoBeanList.hireDate}" /></td>
-				<td><c:out value="${InfoBeanList.commissioningStatus}" /></td>
+				<td>
+					<c:out value="${InfoBeanList.employeeId}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.abbreviation}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.department}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.name}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.nameHiragana}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.birthday}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.businessManager}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.hireDate}" />
+				</td>
+				<td>
+					<c:out value="${InfoBeanList.commissioningStatus}" />
+				</td>
 				<td><a href="ListDetailServlet">詳細</a></td>
 				<td>
 					<form action="DeleteServlet" method="post" name="delete_form">

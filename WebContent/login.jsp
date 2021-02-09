@@ -18,11 +18,11 @@
 			<ul class="loginlist">
 				<li>
 					<label for="loginId">ログインID</label>
-					<input type="text" size="30" id="loginId" name="loginId">
+					<input type="text" size="30" id="loginId" name="loginId"  maxlength='20'>
 				</li>
 				<li class="pass">
 					<label for="password">パスワード</label>
-					<input type="password" size="30" id="password" name="password">
+					<input type="password" size="30" id="password" name="password"  maxlength='20'>
 				</li>
 			</ul>
 		</div>
