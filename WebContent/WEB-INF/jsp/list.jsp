@@ -76,15 +76,15 @@
 				<td>
 					<c:out value="${InfoBeanList.commissioningStatus}" />
 				</td>
-				<td><a href="ListDetailServlet">詳細</a></td>
-				<td>
-					<form action="DeleteServlet" method="post" name="delete_form">
+				<td><a href="ListDetailServlet?employeeId=${InfoBeanList.employeeId}">詳細</a></td><!-- ここにemployeeIdをわたす -->
+				<td><a href="DeleteServlet?employeeId=${InfoBeanList.employeeId}">削除</a></td>
+					<!-- <form action="DeleteServlet" method="get" name="delete_form"> -->
 						<!-- <input type="hidden" name="user_name" value="名前"> -->
 						<!-- <p><a href="javascript:document.delete_form.submit()">削除</a></p> -->
-						<a href="">削除</a>
-					</form>
+						
+					<!-- </form> -->
 					<!-- <a href="DeleteServlet.java">削除</a> -->
-				</td>
+				
 			</tr>
 		</c:forEach>
 	</table>

@@ -34,10 +34,6 @@ public class CompanyInfoDao extends BaseDao {
 		sql.append(" company_info");
 		sql.append(" WHERE");
 		sql.append(" company_id = ?");
-//		sql.append(" AND");
-//		sql.append(" company_name = ?");
-//		sql.append(" AND");
-//		sql.append(" abbreviation = ?");
 
 		try {
 			SQLiteConfig config = new SQLiteConfig();
@@ -94,7 +90,5 @@ public class CompanyInfoDao extends BaseDao {
 			}
 		}
 		return companyInfo;
-
 	}
-
 }

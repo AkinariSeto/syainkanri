@@ -58,11 +58,11 @@ public class LoginServlet extends HttpServlet {
 		loginInfoBean.setPassword(loginInfoBean.getPassword());
 
 		// セッション生成
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		// ログイン情報をセッションに保存
 		session.setAttribute("loginInfo", loginInfoBean);
 
 		// 一覧へ遷移
-		request.getRequestDispatcher("./ListServlet").forward(request, response);
+		request.getRequestDispatcher("./ListServlet").forward(request, response);//2つ使ってたらdopost
 	}
 }

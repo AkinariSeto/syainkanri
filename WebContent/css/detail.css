@@ -43,6 +43,7 @@ input {
 .button {
     text-align: center;
     margin-top: 20px;
+   /*  display: block; */
 }
 button{
     width: 90px;

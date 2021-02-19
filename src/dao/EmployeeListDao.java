@@ -95,7 +95,7 @@ public class EmployeeListDao extends BaseDao {
 				String companySql = companyInfoBean.getAbbreviation();
 				listInfoBean.setAbbreviation(companySql);
 				
-				switch(rs.getInt("department")){//ここで落ちる
+				switch(rs.getInt("department")){
 				case 0:
 					listInfoBean.setDepartment("開発");
 					break;
@@ -113,17 +113,15 @@ public class EmployeeListDao extends BaseDao {
 					break;
 				}
 				
-				listInfoBean.setName(rs.getString("name"));//
-				listInfoBean.setNameHiragana(rs.getString("name_hiragana"));//
-//				listInfoBean.setBirthday(rs.getString("birthday"));//
-				
+				listInfoBean.setName(rs.getString("name"));
+				listInfoBean.setNameHiragana(rs.getString("name_hiragana"));
 				  // 生年月日
 		        String birthdate = rs.getString("birthday");
 
 		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 		        // 生年月日を表す文字列から、LocalDateを生成
-		        LocalDate localBirdhdate = LocalDate.parse(birthdate, formatter);//ここで落ちる
+		        LocalDate localBirdhdate = LocalDate.parse(birthdate, formatter);
 
 		        // 現在の日付を取得
 		        LocalDate nowDate = LocalDate.now();

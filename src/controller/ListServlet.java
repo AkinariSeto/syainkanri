@@ -34,13 +34,14 @@ public class ListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+//		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");// UTF-8にエンコーディング
 		
 		// EmployeeListDaoを生成
@@ -60,8 +61,4 @@ public class ListServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(request, response);
 	}
-	
-	
-	
-	
 }
