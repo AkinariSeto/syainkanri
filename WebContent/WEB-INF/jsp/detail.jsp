@@ -26,9 +26,7 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="name_hiragana">氏名(ひらがな)</label>
-				
 				<input type="text" id="name_hiragana" name="name_hiragana" maxlength='20'value="${detailBean.nameHiragana}">
-				
 			</div>
 		</div>
 		<div class="form_area">
@@ -40,8 +38,8 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="gender">性別</label>
-				<input type="radio" id="gender" name="sex" value="value="${detailBean.sex}">男
-				<input type="radio" id="gender" name="sex" value="${detailBean.sex}">女
+				<input type="radio" id="gender" name="sex" value="0" <c:if test="${detailBean.sex == 0}">checked</c:if>>男
+				<input type="radio" id="gender" name="sex" value="1" <c:if test="${detailBean.sex == 1}">checked</c:if>>女
 			</div>
 		</div>
 		<div class="form_area">
@@ -61,7 +59,7 @@
 				<label for="company">所属会社</label>
 				<select name="company_info_id" id="company">
 				<c:forEach var="companyInfoBeanList" items="${companyInfoBeanList}">
-					<option value="${companyInfoBeanList.companyId}">${companyInfoBeanList.abbreviation}</option>
+					<option value="${companyInfoBeanList.companyId}"  <c:if test="${detailBean.companyInfoId == companyInfoBeanList.companyId}">selected</c:if>>${companyInfoBeanList.abbreviation}</option>
 				</c:forEach>
 				<%-- <c:forEach var="detailBean" items="${detailBean}">
 					<option value="${detailBean.companyId}">${detailBean.abbreviation}</option>
@@ -88,11 +86,11 @@
 					<option value="2">検証</option>
 					<option value="3">オフィス</option>
 					<option value="4">管理</option> -->
-					<option value="0">開発</option>
-					<option value="1">NW</option>
-					<option value="2">検証</option>
-					<option value="3">オフィス</option>
-					<option value="4">管理</option>
+					<option value="0" <c:if test="${detailBean.department == 0}">selected</c:if>>開発</option>
+					<option value="1" <c:if test="${detailBean.department == 1}">selected</c:if>>NW</option>
+					<option value="2" <c:if test="${detailBean.department == 2}">selected</c:if>>検証</option>
+					<option value="3" <c:if test="${detailBean.department == 3}">selected</c:if>>オフィス</option>
+					<option value="4" <c:if test="${detailBean.department == 4}">selected</c:if>>管理</option>
 					<%-- </c:forEach> --%>
 				</select>
 			</div>
@@ -100,8 +98,8 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="commissioningStatus">稼働状況</label>
-				<input type="radio" id="commissioningStatus" name="commissioning_status" value="${detailBean.commissioningStatus}">稼働
-				<input type="radio" id="commissioningStatus" name="commissioning_status" value="${detailBean.commissioningStatus}">未稼働
+				<input type="radio" id="commissioningStatus" name="commissioning_status" value="1" <c:if test="${detailBean.commissioningStatus == 1}">checked</c:if>>稼働
+				<input type="radio" id="commissioningStatus" name="commissioning_status" value="0" <c:if test="${detailBean.commissioningStatus == 0}">checked</c:if>>未稼働
 			</div>
 		</div>
 		<div class="form_area">
@@ -120,10 +118,10 @@
 			<div class="form_detail">
 				<label for="status">ステータス</label>
 				<select name="status" id="status">
-					<option value="0">在籍</option>
-					<option value="1">退職</option>
-					<option value="2">入社待</option>
-					<option value="3">入社取り消し</option>
+					<option value="0" <c:if test="${detailBean.status == 0}">selected</c:if>>在籍</option>
+					<option value="1" <c:if test="${detailBean.status == 1}">selected</c:if>>退職</option>
+					<option value="2" <c:if test="${detailBean.status == 2}">selected</c:if>>入社待</option>
+					<option value="3" <c:if test="${detailBean.status == 3}">selected</c:if>>入社取り消し</option>
 				</select>
 			</div>
 		</div>
