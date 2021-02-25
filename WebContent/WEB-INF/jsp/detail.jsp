@@ -15,12 +15,12 @@
 	<h1>社員詳細</h1>
 
 	<form action="NewRegisterServlet" method="post">
+	 <input type="hidden" name="employee_id" value="${detailBean.employeeId}">
+	 <%-- <input type="hidden" name="login_id" value="${detailBean.loginId}"> --%>
 		<div class="form_area">
 			<div class="form_top">
 				<label for="name">氏名</label>
-				<%--  <c:forEach var="detailBean" items="${detailBean}"> --%>
 				<input type="text" id="name" name="name" maxlength='20'value="${detailBean.name}">
-				<%-- </c:forEach> --%>
 			</div>
 		</div>
 		<div class="form_area">
@@ -58,12 +58,9 @@
 			<div class="form_detail">
 				<label for="company">所属会社</label>
 				<select name="company_info_id" id="company">
-				<c:forEach var="companyInfoBeanList" items="${companyInfoBeanList}">
-					<option value="${companyInfoBeanList.companyId}"  <c:if test="${detailBean.companyInfoId == companyInfoBeanList.companyId}">selected</c:if>>${companyInfoBeanList.abbreviation}</option>
-				</c:forEach>
-				<%-- <c:forEach var="detailBean" items="${detailBean}">
-					<option value="${detailBean.companyId}">${detailBean.abbreviation}</option>
-				</c:forEach> --%>
+					<c:forEach var="companyInfoBeanList" items="${companyInfoBeanList}">
+						<option value="${companyInfoBeanList.companyId}"  <c:if test="${detailBean.companyInfoId == companyInfoBeanList.companyId}">selected</c:if>>${companyInfoBeanList.abbreviation}</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -126,7 +123,8 @@
 			</div>
 		</div>
 			<div class="button">
-				<button>更新</button>
+				<c:if test="${empty detailBean.employeeId}"><button>登録</button></c:if>
+				<c:if test="${!empty detailBean.employeeId}"><button>更新</button></c:if>
 			<button type="button" onclick="history.back()">戻る</button>
 			</div>
 	</form>
