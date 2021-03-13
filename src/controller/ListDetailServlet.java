@@ -16,77 +16,52 @@ import beans.DetailBean;
 import dao.CompanySelectDao;
 import dao.DetailDao;
 
-/**
- * Servlet implementation class ListServlet
- */
 @WebServlet("/ListDetailServlet")
 public class ListDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListDetailServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// UTF-8にエンコーディング
 		request.setCharacterEncoding("UTF8");
 
-		
+		// CompanySelectDaoをインスタンス化
 		CompanySelectDao companySelectDao = new CompanySelectDao();
+		// 会社情報をリストにしたものをインスタンス化
 		List<CompanyInfoBean> companyInfoBeanList = new ArrayList<CompanyInfoBean>();
-//		EmployeeListDao employeeListDao = new EmployeeListDao();
-//		List<ListInfoBean> infoBeanList = new ArrayList<ListInfoBean>();
-//		try {
-//			// 入力された値でログイン情報検索
-//			infoBeanList = employeeListDao.EmployeeListInfo();
-//		} catch (Exception e) {
-//			throw new ServletException(e.getMessage());
-//		}
 
-		
+		// employeeIdのリクエストパラメーターを取得
 		String employeeId = request.getParameter("employeeId");
-		
+		// DetailDaoをインスタンス化
 		DetailDao detailDao = new DetailDao();
-//		CompanySelectDao companySelectDao = new CompanySelectDao();
+		// DetailBeanをインスタンス化
 		DetailBean detailBean = new DetailBean();
 		try {
-		// 入力された値でログイン情報検索
-		detailBean = detailDao.Detail(employeeId);
-//		detailBean = detailDao.Detail(employeeId);
-	} catch (Exception e) {
-		throw new ServletException(e.getMessage());
-	}
+			// 詳細情報を取得したものを代入
+			detailBean = detailDao.Detail(employeeId);
+		} catch (Exception e) {
+			throw new ServletException(e.getMessage());
+		}
 		try {
-			// 入力された値でログイン情報検索
+			// 会社情報を取得し、companyInfoBeanListに代入
 			companyInfoBeanList = companySelectDao.findCompany();
 		} catch (Exception e) {
 			throw new ServletException(e.getMessage());
 		}
 		// セッション生成
 		HttpSession session = request.getSession();
-		// ログイン情報をセッションに保存
+		// 会社情報をセッションに保存
 		session.setAttribute("companyInfoBeanList", companyInfoBeanList);
 		// セッション生成
 		HttpSession session2 = request.getSession();
-		// ログイン情報をセッションに保存
+		// 詳細情報をセッションに保存
 		session2.setAttribute("detailBean", detailBean);
-		// 一覧へ遷移
+		// 詳細へ遷移
 		request.getRequestDispatcher("/WEB-INF/jsp/detail.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

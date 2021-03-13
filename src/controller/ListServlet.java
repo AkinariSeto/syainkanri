@@ -51,7 +51,8 @@ public class ListServlet extends HttpServlet {
 			// 入力された値でログイン情報検索
 			infoBeanList = employeeListDao.EmployeeListInfo();
 		} catch (Exception e) {
-			throw new ServletException(e.getMessage());
+//			throw new ServletException(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		// セッション生成

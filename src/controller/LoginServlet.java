@@ -59,6 +59,7 @@ public class LoginServlet extends HttpServlet {
 
 		// セッション生成
 		HttpSession session = request.getSession(true);
+		session.setMaxInactiveInterval(1800);
 		// ログイン情報をセッションに保存
 		session.setAttribute("loginInfo", loginInfoBean);
 

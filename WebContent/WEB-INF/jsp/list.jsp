@@ -77,17 +77,21 @@
 					<c:out value="${InfoBeanList.commissioningStatus}" />
 				</td>
 				<td><a href="ListDetailServlet?employeeId=${InfoBeanList.employeeId}">詳細</a></td><!-- ここにemployeeIdをわたす -->
-				<td><a href="DeleteServlet?employeeId=${InfoBeanList.employeeId}">削除</a></td>
-					<!-- <form action="DeleteServlet" method="get" name="delete_form"> -->
-						<!-- <input type="hidden" name="user_name" value="名前"> -->
-						<!-- <p><a href="javascript:document.delete_form.submit()">削除</a></p> -->
-						
-					<!-- </form> -->
-					<!-- <a href="DeleteServlet.java">削除</a> -->
+				<td><a href="DeleteServlet?employeeId=${InfoBeanList.employeeId}" onclick="return deleteCheck()">削除</a></td>
 				
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<script type="text/javascript">
+	function deleteCheck() {
+		if (window.confirm('削除しますか？')) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
 </body>
 
 </html>

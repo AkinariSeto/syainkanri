@@ -1,5 +1,9 @@
 package beans;
 
+/**
+ * 
+ * 社員情報、状況ビーンズ
+ */
 public class EmployeeInfoStateBean {
 
 	/** 社員ID */
