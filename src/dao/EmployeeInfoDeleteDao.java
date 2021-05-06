@@ -8,14 +8,24 @@ import org.sqlite.SQLiteConfig;
 
 import beans.ListInfoBean;
 
+/**
+ * 
+ * 削除を行うクラス
+ * 
+ * @author setoakinari
+ */
 public class EmployeeInfoDeleteDao extends BaseDao {
-
+	/**
+	 * employee_info、employee_stateの会社IDをそれぞれ削除する
+	 * 
+	 * @param employeeId
+	 */
 	public void EmployeeInfoDelete(String employeeId) {
 
-		/** PreparedStatementを初期化 */
+		// PreparedStatementを初期化
 		PreparedStatement pstmtInfo = null;
 		PreparedStatement pstmtState = null;
-		
+
 		// 事前準備
 		try {
 			Class.forName(DRIVER_NAME);
@@ -25,15 +35,15 @@ public class EmployeeInfoDeleteDao extends BaseDao {
 
 		// 一覧情報Bean
 		ListInfoBean listInfoBean = null;
-//		Connection con = null;
-		// ログインIDとパスワードからユーザー情報を取得するSQL
+		// 主キーのIDを削除するSQL
 		StringBuilder deleteEmployeeInfo = new StringBuilder();
 		deleteEmployeeInfo.append("DELETE");
 		deleteEmployeeInfo.append(" FROM");
 		deleteEmployeeInfo.append(" employee_info");
 		deleteEmployeeInfo.append(" WHERE");
 		deleteEmployeeInfo.append(" employee_id = ?");
-		
+
+		// 子キーのIDを削除するSQL
 		StringBuilder deleteEmployeeState = new StringBuilder();
 		deleteEmployeeState.append("DELETE");
 		deleteEmployeeState.append(" FROM");
@@ -51,13 +61,11 @@ public class EmployeeInfoDeleteDao extends BaseDao {
 			pstmtInfo.setString(1, employeeId);
 			pstmtState = conn.prepareStatement(deleteEmployeeState.toString());
 			pstmtState.setString(1, employeeId);
-
+			// 子キーのIDを削除
 			pstmtState.executeUpdate();
+			// 親キーのIDを削除
 			pstmtInfo.executeUpdate();
 
-			
-//			conn.commit();
-			
 		} catch (SQLException e) {
 			// 接続や、SQL処理失敗時の処理
 			e.printStackTrace();

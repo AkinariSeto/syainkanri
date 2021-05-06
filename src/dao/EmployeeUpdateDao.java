@@ -7,10 +7,30 @@ import org.sqlite.SQLiteConfig;
 
 import beans.EmployeeRegisterBean;
 
-public class EmployeeUpdateDao extends BaseDao{
-
-	public EmployeeRegisterBean EmployeeUpdate(String employeeId, String name, String nameHiragana, String birthday, String sex,
-			String mailAddress, String telephoneNumber, String created_id, String login_id)
+/**
+ * 更新用のクラス
+ *
+ * @author setoakinari
+ */
+public class EmployeeUpdateDao extends BaseDao {
+	/**
+	 * employee_infoの情報を更新し、EmployeeUpdateInfoに返す
+	 * 
+	 * @param employeeId
+	 * @param name
+	 * @param nameHiragana
+	 * @param birthday
+	 * @param sex
+	 * @param mailAddress
+	 * @param telephoneNumber
+	 * @param created_id
+	 * @param login_id
+	 * @return employeeUpdateInfo
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public EmployeeRegisterBean EmployeeUpdateInfo(String employeeId, String name, String nameHiragana, String birthday,
+			String sex, String mailAddress, String telephoneNumber, String created_id, String login_id)
 			throws SQLException, ClassNotFoundException {
 		// 事前準備
 		try {
@@ -19,10 +39,10 @@ public class EmployeeUpdateDao extends BaseDao{
 			e.printStackTrace();
 		}
 
-		// 社員情報Bean
-		EmployeeRegisterBean employeeUpdate = null;
+		// 社員情報更新用Beanを初期化
+		EmployeeRegisterBean employeeUpdateInfo = null;
 
-		// ログインIDとパスワードからユーザー情報を取得するSQL
+		// employee_infoの情報を更新するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE");
 		sql.append(" employee_info");
@@ -33,7 +53,6 @@ public class EmployeeUpdateDao extends BaseDao{
 		sql.append(" sex = ?,");
 		sql.append(" mail_address = ?,");
 		sql.append(" telephone_number = ?,");
-//		sql.append(" created_id = ?,");
 		sql.append(" modified_id = ?");
 		sql.append(" WHERE");
 		sql.append(" employee_id");
@@ -51,18 +70,15 @@ public class EmployeeUpdateDao extends BaseDao{
 			// PreparedStatementを生成
 			pstmt = conn.prepareStatement(sql.toString());
 
-			// 1番目のプレースホルダにパラメータを設定
+			// 各プレースホルダにパラメータを設定
 			pstmt.setString(1, name);
 			pstmt.setString(2, nameHiragana);
 			pstmt.setString(3, birthday);
 			pstmt.setString(4, sex);
 			pstmt.setString(5, mailAddress);
 			pstmt.setString(6, telephoneNumber);
-//			pstmt.setString(7, login_id);
 			pstmt.setString(7, login_id);
 			pstmt.setString(8, employeeId);
-			// pstmt.setString(7, loginInfoBean.getLoginId());
-			// pstmt.setString(8, loginInfoBean.getLoginId());
 
 			// SQLを実行
 			pstmt.executeUpdate();
@@ -96,11 +112,28 @@ public class EmployeeUpdateDao extends BaseDao{
 				conn = null;
 			}
 		}
-		return employeeUpdate;
+		return employeeUpdateInfo;
 	}
-	public EmployeeRegisterBean EmployeeUpdate2(String employeeId, String companyInfoId, String businessManager, String department,
-			String commissioningStatus, String hireDate, String retireDate, String status, String login_id)
-			throws SQLException, ClassNotFoundException {
+
+	/**
+	 * employee_stateの情報を更新し、employeeUpdateStateに返す
+	 * 
+	 * @param employeeId
+	 * @param companyInfoId
+	 * @param businessManager
+	 * @param department
+	 * @param commissioningStatus
+	 * @param hireDate
+	 * @param retireDate
+	 * @param status
+	 * @param login_id
+	 * @return employeeUpdateState
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public EmployeeRegisterBean EmployeeUpdateState(String employeeId, String companyInfoId, String businessManager,
+			String department, String commissioningStatus, String hireDate, String retireDate, String status,
+			String login_id) throws SQLException, ClassNotFoundException {
 
 		// 事前準備
 		try {
@@ -109,18 +142,14 @@ public class EmployeeUpdateDao extends BaseDao{
 			e.printStackTrace();
 		}
 
-//		EmployeeRegisterDao findEmpId =  new EmployeeRegisterDao();
+		// 社員情報更新用Beanを初期化
+		EmployeeRegisterBean employeeUpdateState = null;
 
-//		EmployeeRegisterBean findEmpId2 = findEmpId.findOne();
-		// 社員情報Bean
-		EmployeeRegisterBean employeeUpdate2 = null;
-
-		// ログインIDとパスワードからユーザー情報を取得するSQL
+		// employee_stateの情報を更新するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE");
 		sql.append(" employee_state");
 		sql.append(" SET");
-//		sql.append(" employee_info_id,");
 		sql.append(" company_info_id = ?,");
 		sql.append(" business_manager = ?,");
 		sql.append(" department = ?,");
@@ -128,7 +157,6 @@ public class EmployeeUpdateDao extends BaseDao{
 		sql.append(" status = ?,");
 		sql.append(" hire_date = ?,");
 		sql.append(" retire_date = ?,");
-//		sql.append(" created_id = ?,");
 		sql.append(" modified_id = ?");
 		sql.append(" WHERE");
 		sql.append(" employee_info_id");
@@ -146,20 +174,14 @@ public class EmployeeUpdateDao extends BaseDao{
 			// PreparedStatementを生成
 			pstmt = conn.prepareStatement(sql.toString());
 
-			// 1番目のプレースホルダにパラメータを設定
-//			pstmt.setString(1, String.valueOf(findEmpId.getEmployeeId()));
-//			pstmt.setInt(1, findEmpId2.getEmployeeId());
-//			pstmt.setString(2, companyInfoId);
+			// 各プレースホルダにパラメータを設定
 			pstmt.setInt(1, Integer.parseInt(companyInfoId));
-//			pstmt.setInt(1, 1);
 			pstmt.setString(2, businessManager);
 			pstmt.setString(3, department);
 			pstmt.setString(4, commissioningStatus);
 			pstmt.setString(5, status);
 			pstmt.setString(6, hireDate);
 			pstmt.setString(7, retireDate);
-//			pstmt.setInt(8, 88);
-//			pstmt.setString(8, login_id);
 			pstmt.setString(8, login_id);
 			pstmt.setString(9, employeeId);
 
@@ -167,7 +189,6 @@ public class EmployeeUpdateDao extends BaseDao{
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-//			throw new SQLException("DB接続で失敗しました。");
 			e.printStackTrace();
 		} finally {
 			// リソースを開放
@@ -196,8 +217,6 @@ public class EmployeeUpdateDao extends BaseDao{
 				conn = null;
 			}
 		}
-		return employeeUpdate2;
+		return employeeUpdateState;
 	}
-
-
 }

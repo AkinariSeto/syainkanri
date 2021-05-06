@@ -5,63 +5,27 @@ import java.sql.SQLException;
 
 import org.sqlite.SQLiteConfig;
 
-import login.LoginInfoBean;
+import beans.LoginInfoBean;
 
+/**
+ * ログインIDとパスワードからユーザー情報を取得するクラス
+ * 
+ * @author setoakinari
+ *
+ */
 public class LoginDao extends BaseDao {
 
-	
-
-//	public LoginInfoBean findAccount(LoginInfoBean loginInfoBean) {
-//
-//		try {
-//			Class.forName(DRIVER_NAME);
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		// 戻り値の用意
-//		LoginInfoBean returnLb = new LoginInfoBean();
-//
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		// データベースへ接続
-//			try{
-//			// データベース接続、外部キー制約を有効にする
-//			SQLiteConfig config = new SQLiteConfig();
-//			config.enforceForeignKeys(true);
-//			con = DriverManager.getConnection(URL, config.toProperties());
-//
-//			String sql = "SELECT login_id, password FROM login_info WHERE login_id = ? AND password = ?";
-//			pstmt = con.prepareStatement(sql);
-//
-//			pstmt.setString(1, loginInfoBean.getLoginId());
-//			pstmt.setString(2, loginInfoBean.getPassword());
-//
-////			ResultSet rs = ps.executeQuery();
-//			rs = pstmt.executeQuery();
-//
-//			if (rs.next()) {
-//				// 見つかったアカウント情報を戻り値にセット
-//				returnLb.setLoginId(rs.getString("loginId"));//ここで落ちる loginIdとpasswordがreturnLbに入っていない(null)
-//				returnLb.setPassword(rs.getString("password"));
-//				// returnLb.setName(rs.getString("name"));
-//				// returnLb.setRole(rs.getInt("roleId"));
-//			} else {
-//				// アカウントがなければnullを返す
-//				return null;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//		return returnLb;
-//	}
-//}
-
-	// ログインアカウントを探す
+	/**
+	 * ログインIDとパスワードを検索してloginInfoに返す
+	 * 
+	 * @param loginId
+	 * @param password
+	 * @return loginInfo
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public LoginInfoBean findOne(String loginId, String password) throws SQLException, ClassNotFoundException {
-		
+
 		// 事前準備
 		try {
 			Class.forName(DRIVER_NAME);

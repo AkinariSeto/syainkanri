@@ -8,11 +8,21 @@ import org.sqlite.SQLiteConfig;
 
 import beans.CompanyInfoBean;
 
+/**
+ * 会社情報を検索するクラス
+ * 
+ * @author setoakinari
+ */
 public class CompanyInfoDao extends BaseDao {
-
-	
-	public CompanyInfoBean findCompanyInfo(String companyId)
-			throws SQLException, ClassNotFoundException {
+	/**
+	 * 検索した会社情報をcompanyInfoに返す
+	 * 
+	 * @param companyId
+	 * @return companyInfo
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public CompanyInfoBean findCompanyInfo(String companyId) throws SQLException, ClassNotFoundException {
 		ResultSet companyRs = null;
 		// 事前準備
 		try {
@@ -21,10 +31,10 @@ public class CompanyInfoDao extends BaseDao {
 			e.printStackTrace();
 		}
 
-		// 会社情報Bean
+		// 会社情報Beanを初期化
 		CompanyInfoBean companyInfo = null;
 
-		// ログインIDとパスワードからユーザー情報を取得するSQL
+		// 会社IDから会社情報を取得するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT");
 		sql.append(" company_id,");
@@ -47,22 +57,24 @@ public class CompanyInfoDao extends BaseDao {
 			pstmt = conn.prepareStatement(sql.toString());
 			// 1番目のプレースホルダにパラメータを設定
 			pstmt.setString(1, companyId);
-		
+
 			// SQLを実行
 			companyRs = pstmt.executeQuery();
 
 			// 検索結果が見つかった場合
 			if (companyRs.next()) {
-				// ユーザー情報に取得
+				// 会社情報を生成
 				companyInfo = new CompanyInfoBean();
-				companyInfo.setCompanyId(companyRs.getInt("company_id"));// 会社ID。
-				companyInfo.setCompanyName(companyRs.getString("company_name"));// 会社ID。
-				companyInfo.setAbbreviation(companyRs.getString("abbreviation"));// 会社ID
+				// 会社IDをセット
+				companyInfo.setCompanyId(companyRs.getInt("company_id"));
+				// 会社名をセット
+				companyInfo.setCompanyName(companyRs.getString("company_name"));
+				// 会社略称をセット
+				companyInfo.setAbbreviation(companyRs.getString("abbreviation"));
 			}
 		} catch (SQLException e) {
 			throw new SQLException("DB接続で失敗しました。");
-		} 
-		finally {
+		} finally {
 			// リソースを開放
 			if (companyRs != null) {
 				try {

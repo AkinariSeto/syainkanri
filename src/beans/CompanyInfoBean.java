@@ -1,5 +1,11 @@
 package beans;
 
+/**
+ * 会社情報Bean
+ * 
+ * @author setoakinari
+ *
+ */
 public class CompanyInfoBean {
 	/** 会社ID */
 	private int companyId;

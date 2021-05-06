@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.LoginInfoBean;
 import dao.LoginDao;
-import login.LoginInfoBean;
 
+@WebServlet("/login")
 /**
- * Servlet implementation class LoginServlet
+ * 入力されたログインIDとパスワードがDBと一致するか判定するサーブレット
+ * 
+ * @author setoakinari
+ *
  */
-@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,14 +30,15 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// UTF-8にエンコーディング
+		request.setCharacterEncoding("UTF-8");
 		// 入力フォームの値を取得
-		request.setCharacterEncoding("UTF-8");// UTF-8にエンコーディング
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		// ログインDaoを生成
 		LoginDao loginDao = new LoginDao();
+		// LoginInfoBeanを初期化
 		LoginInfoBean loginInfoBean = null;
 
 		try {
@@ -59,11 +63,12 @@ public class LoginServlet extends HttpServlet {
 
 		// セッション生成
 		HttpSession session = request.getSession(true);
+		// 30分でセッションを切る
 		session.setMaxInactiveInterval(1800);
 		// ログイン情報をセッションに保存
 		session.setAttribute("loginInfo", loginInfoBean);
 
 		// 一覧へ遷移
-		request.getRequestDispatcher("./ListServlet").forward(request, response);//2つ使ってたらdopost
+		request.getRequestDispatcher("./list").forward(request, response);
 	}
 }

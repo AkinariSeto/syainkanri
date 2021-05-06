@@ -11,7 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.EmployeeInfoDeleteDao;
 
-@WebServlet("/DeleteServlet")
+@WebServlet("/delete")
+/**
+ * 削除を実行し一覧画面へ遷移するサーブレット
+ * 
+ * @author setoakinari
+ *
+ */
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +26,7 @@ public class DeleteServlet extends HttpServlet {
 		// UTF-8にエンコーディング
 		request.setCharacterEncoding("UTF8");
 		// employeeIdのリクエストパラメーターを取得
-		String employeeId = request.getParameter("employeeId");
+		String employeeId = request.getParameter("empId");
 		// EmployeeInfoDeleteDaoをインスタンス化
 		EmployeeInfoDeleteDao employeeInfoDeleteDao = new EmployeeInfoDeleteDao();
 
@@ -32,7 +38,7 @@ public class DeleteServlet extends HttpServlet {
 		}
 
 		// 一覧画面へフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ListServlet");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/list");
 		dispatcher.forward(request, response);
 	}
 

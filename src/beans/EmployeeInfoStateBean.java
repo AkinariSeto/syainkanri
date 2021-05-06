@@ -1,8 +1,10 @@
 package beans;
 
 /**
+ * 社員情報、状況Bean
  * 
- * 社員情報、状況ビーンズ
+ * @author setoakinari
+ *
  */
 public class EmployeeInfoStateBean {
 

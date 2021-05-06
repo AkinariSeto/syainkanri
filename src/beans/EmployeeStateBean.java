@@ -1,8 +1,10 @@
 package beans;
 
 /**
+ * 社員状況Bean
  * 
- * 社員状況ビーンズ
+ * @author setoakinari
+ *
  */
 public class EmployeeStateBean {
 	/** 社員ID */

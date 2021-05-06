@@ -1,8 +1,10 @@
 package beans;
 
 /**
+ * 一覧用Bean
  * 
- * 社員情報、状況登録用ビーンズ
+ * @author setoakinari
+ *
  */
 public class ListInfoBean {
 	/** 社員ID */
