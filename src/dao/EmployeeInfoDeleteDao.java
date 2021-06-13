@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 import org.sqlite.SQLiteConfig;
 
-import beans.ListInfoBean;
-
 /**
  * 
  * 削除を行うクラス
@@ -33,8 +31,6 @@ public class EmployeeInfoDeleteDao extends BaseDao {
 			e.printStackTrace();
 		}
 
-		// 一覧情報Bean
-		ListInfoBean listInfoBean = null;
 		// 主キーのIDを削除するSQL
 		StringBuilder deleteEmployeeInfo = new StringBuilder();
 		deleteEmployeeInfo.append("DELETE");

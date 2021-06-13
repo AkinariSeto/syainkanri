@@ -17,7 +17,7 @@
 	<!-- ログインID、パスワードのフォーム -->
 	<form action="login" method="post">
 		<div class="form_contents">
-			<ul class="loginlist">
+			<ul>
 				<!-- ログインID -->
 				<li>
 					<label for="loginId">ログインID</label>

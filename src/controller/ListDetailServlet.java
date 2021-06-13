@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,8 +39,6 @@ public class ListDetailServlet extends HttpServlet {
 		// employeeIdのリクエストパラメーターを取得
 		String employeeId = request.getParameter("empId");
 
-		Random randomValue = new Random();
-
 		// DetailDaoをインスタンス化
 		DetailDao detailDao = new DetailDao();
 		// DetailBeanをインスタンス化
@@ -59,10 +56,7 @@ public class ListDetailServlet extends HttpServlet {
 		} catch (Exception e) {
 			throw new ServletException(e.getMessage());
 		}
-//		computeSquare(detailBean.department);
-		//computeSquare(1);
 
-//		System.out.println(detailBean.department);
 		// セッション生成
 		HttpSession session = request.getSession();
 		// 会社情報をセッションに保存
@@ -75,26 +69,7 @@ public class ListDetailServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/jsp/detail.jsp").forward(request, response);
 	}
 
-//	public enum dep(department){
-//		switch (department) {
-//		case 0:
-//			return "開発";
-//			break;
-//		case 1:
-//			return "NW";
-//			break;
-//		case 2:
-//			return "検証";
-//			break;
-//		case 3:
-//			return "オフィス";
-//			break;
-//		case 4:
-//			return "管理";
-//			break;
-//    }
-//	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

@@ -2,10 +2,13 @@ package dao;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.sqlite.SQLiteConfig;
@@ -138,11 +141,11 @@ public class EmployeeListDao extends BaseDao {
 				// 生年月日のフォーマットを決める
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				// 生年月日を表す文字列から、LocalDateを生成
-				LocalDate localBirdhdate = LocalDate.parse(birthdate, formatter);
+				LocalDate localBirthDate = LocalDate.parse(birthdate, formatter);
 				// 現在の日付を取得
 				LocalDate nowDate = LocalDate.now();
 				// 現在と生年月日の差分を年単位で算出することによって、年齢を計算する
-				long age = ChronoUnit.YEARS.between(localBirdhdate, nowDate);
+				long age = ChronoUnit.YEARS.between(localBirthDate, nowDate);
 				// listInfoBeanに年齢をセット
 				listInfoBean.setBirthday(age);
 				
@@ -150,7 +153,11 @@ public class EmployeeListDao extends BaseDao {
 				listInfoBean.setBusinessManager(rs.getString("business_manager"));
 				
 				// listInfoBeanに入社日をセット
-				listInfoBean.setHireDate(rs.getString("hire_date"));
+				String hireDate = rs.getString("hire_date");
+				SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            Date normalHireDate = sqlFormat.parse(hireDate);
+	            String formatHireDate = new SimpleDateFormat("yyyy/MM/dd").format(normalHireDate);
+				listInfoBean.setHireDate(formatHireDate);
 				
 				// listInfoBeanに稼働状況をセット
 				if (rs.getInt("commissioning_status") == 0) {
@@ -163,6 +170,9 @@ public class EmployeeListDao extends BaseDao {
 			}
 		} catch (SQLException e) {
 			throw new SQLException(e);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		} finally {
 			// リソースを開放
 			if (rs != null) {

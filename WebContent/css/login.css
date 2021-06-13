@@ -10,17 +10,11 @@ body {
     text-align: center;
 }
 
-/* #error {
-	background-color: red;
-	color: #fff;
-} */
-
 .form_contents {
     width: 450px;
-    background-color: #FFFFCC;
+    background-color: #fbe5a3;
     border: 1px solid #000;
     margin: 15px auto 0 auto;
-
 }
 
 ul {

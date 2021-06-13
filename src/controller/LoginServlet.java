@@ -59,8 +59,6 @@ public class LoginServlet extends HttpServlet {
 
 		// ログインIDを設定
 		loginInfoBean.setLoginId(loginInfoBean.getLoginId());
-		loginInfoBean.setPassword(loginInfoBean.getPassword());
-
 		// セッション生成
 		HttpSession session = request.getSession(true);
 		// 30分でセッションを切る
