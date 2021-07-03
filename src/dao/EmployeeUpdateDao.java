@@ -16,16 +16,16 @@ public class EmployeeUpdateDao extends BaseDao {
 	/**
 	 * employee_infoの情報を更新し、EmployeeUpdateInfoに返す
 	 * 
-	 * @param employeeId
-	 * @param name
-	 * @param nameHiragana
-	 * @param birthday
-	 * @param sex
-	 * @param mailAddress
-	 * @param telephoneNumber
-	 * @param created_id
-	 * @param login_id
-	 * @return employeeUpdateInfo
+	 * @param employeeId 社員ID
+	 * @param name 名前
+	 * @param nameHiragana ふりがな
+	 * @param birthday 誕生日
+	 * @param sex 性別
+	 * @param mailAddress メールアドレス
+	 * @param telephoneNumber 電話番号
+	 * @param created_id 作成者ID
+	 * @param login_id ログインID
+	 * @return employeeUpdateInfo 名前、ふりがな、誕生日、性別、メールアドレス、電話番号、ログインID、社員ID
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -118,16 +118,16 @@ public class EmployeeUpdateDao extends BaseDao {
 	/**
 	 * employee_stateの情報を更新し、employeeUpdateStateに返す
 	 * 
-	 * @param employeeId
-	 * @param companyInfoId
-	 * @param businessManager
-	 * @param department
-	 * @param commissioningStatus
-	 * @param hireDate
-	 * @param retireDate
-	 * @param status
-	 * @param login_id
-	 * @return employeeUpdateState
+	 * @param employeeId 社員ID
+	 * @param companyInfoId 会社ID
+	 * @param businessManager 管理営業
+	 * @param department 事業部
+	 * @param commissioningStatus 稼働状況
+	 * @param hireDate 入社日
+	 * @param retireDate 退職日
+	 * @param status ステータス
+	 * @param login_id ログインID
+	 * @return employeeUpdateState 会社ID、管理営業、事業部、稼働状況、ステータス、入社日、退職日、ログインID、社員ID
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */

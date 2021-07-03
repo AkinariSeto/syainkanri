@@ -17,7 +17,7 @@ public class CompanyInfoDao extends BaseDao {
 	/**
 	 * 検索した会社情報をcompanyInfoに返す
 	 * 
-	 * @param companyId
+	 * @param companyId 会社ID
 	 * @return companyInfo
 	 * @throws SQLException
 	 * @throws ClassNotFoundException

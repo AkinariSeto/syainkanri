@@ -24,7 +24,7 @@ public class DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
-		request.setCharacterEncoding("UTF8");
+		request.setCharacterEncoding("UTF-8");
 		// employeeIdのリクエストパラメーターを取得
 		String employeeId = request.getParameter("empId");
 		// EmployeeInfoDeleteDaoをインスタンス化

@@ -18,9 +18,9 @@ public class LoginDao extends BaseDao {
 	/**
 	 * ログインIDとパスワードを検索してloginInfoに返す
 	 * 
-	 * @param loginId
-	 * @param password
-	 * @return loginInfo
+	 * @param loginId ログインID
+	 * @param password パスワード
+	 * @return loginInfo ログインID、パスワード
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */

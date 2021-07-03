@@ -29,7 +29,7 @@ public class ListRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
-		request.setCharacterEncoding("UTF8");
+		request.setCharacterEncoding("UTF-8");
 		// セッションを生成
 		HttpSession session3 = request.getSession(true);
 		// ログイン情報をとってくる

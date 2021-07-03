@@ -58,7 +58,7 @@ public class EmployeeListDao extends BaseDao {
 	/**
 	 * 検索した一覧情報をdetailListに返す
 	 *
-	 * @return detailList
+	 * @return detailList 社員ID、会社ID、事業部、名前、ふりがな、誕生日、担当管理営業、入社日、稼働状況
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -106,11 +106,15 @@ public class EmployeeListDao extends BaseDao {
 			pstmt = conn.prepareStatement(sql.toString());
 			// SQLを実行
 			rs = pstmt.executeQuery();
-
+			
+			int num = 1;
 			// 一覧リストの出力方法を決める
 			while (rs.next()) {
 				// listInfoBeanを生成
 				listInfoBean = new ListInfoBean();
+				// listInfoBeanに通番をセット
+				listInfoBean.setNumber(num);
+				num++;
 				// listInfoBeanに社員IDをセット
 				listInfoBean.setEmployeeId(rs.getInt("employee_id"));
 				// CompanyInfoDaoを生成
@@ -171,7 +175,6 @@ public class EmployeeListDao extends BaseDao {
 		} catch (SQLException e) {
 			throw new SQLException(e);
 		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			// リソースを開放

@@ -6,23 +6,26 @@
 }
 
 h1 {
-    text-align: center;
+	text-align: center;
 }
 
 button {
-    display: block;
-    margin: 0 40px 0 auto;
+	display: block;
+	margin: 0 40px 0 auto;
 }
 
 table {
 	width: 100%;
 	margin-top: 20px;
+	border-collapse: collapse;
 }
 
 th {
-    background-color: #d4e1f5;
+	background-color: #d4e1f5;
+	border: 1px solid #000066;
 }
 
-td{
+td {
 	text-align: center;
+	border: 1px solid #000066;
 }

@@ -29,7 +29,7 @@ public class ListDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
-		request.setCharacterEncoding("UTF8");
+		request.setCharacterEncoding("UTF-8");
 
 		// CompanySelectDaoをインスタンス化
 		CompanySelectDao companySelectDao = new CompanySelectDao();
@@ -46,11 +46,6 @@ public class ListDetailServlet extends HttpServlet {
 		try {
 			// 詳細情報を取得したものを代入
 			detailBean = detailDao.Detail(employeeId);
-
-		} catch (Exception e) {
-			throw new ServletException(e.getMessage());
-		}
-		try {
 			// 会社情報を取得し、companyInfoBeanListに代入
 			companyInfoBeanList = companySelectDao.findCompany();
 		} catch (Exception e) {

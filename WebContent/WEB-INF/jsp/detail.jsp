@@ -75,9 +75,9 @@
 			<div class="form_detail">
 				<label for="company">所属会社</label>
 				<select name="companyInfoId" id="company">
-					<c:forEach var="companyInfoBeanList" items="${companyInfoBeanList}">
 						<option value=""
 							<c:if test="${detailBean.companyInfoId == null}">selected</c:if>></option>
+					<c:forEach var="companyInfoBeanList" items="${companyInfoBeanList}">
 						<option value="${companyInfoBeanList.companyId}"
 							<c:if test="${detailBean.companyInfoId == companyInfoBeanList.companyId}">selected</c:if>>${companyInfoBeanList.abbreviation}</option>
 					</c:forEach>
@@ -163,7 +163,7 @@
 				<button name="updateBtn" onclick="return updateCheck()">更新</button>
 			</c:if>
 			<!-- 戻るボタン -->
-			<button type="button" onclick="history.back()">戻る</button>
+			<button type="button" onclick='location.href="list"'>戻る</button>
 		</div>
 	</form>
 

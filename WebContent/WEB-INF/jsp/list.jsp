@@ -23,7 +23,7 @@
 		<button type="submit">新規登録</button>
 	</form>
 	<!-- 一覧画面 -->
-	<table border="1">
+	<table>
 		<!-- 目次 -->
 		<tr>
 			<!-- 社員ID-->
@@ -53,7 +53,7 @@
 		<c:forEach var="InfoBeanList" items="${InfoBeanList}">
 			<tr>
 				<!-- 社員IDを出力 -->
-				<td><c:out value="${InfoBeanList.employeeId}" /></td>
+				<td><c:out value="${InfoBeanList.number}" /></td>
 				<!-- 会社略称を出力 -->
 				<td><c:out value="${InfoBeanList.abbreviation}" /></td>
 				<!-- 事業部を出力 -->

@@ -16,7 +16,7 @@ public class EmployeeInfoDeleteDao extends BaseDao {
 	/**
 	 * employee_info、employee_stateの会社IDをそれぞれ削除する
 	 * 
-	 * @param employeeId
+	 * @param employeeId 社員ID
 	 */
 	public void EmployeeInfoDelete(String employeeId) {
 

@@ -7,6 +7,9 @@ package beans;
  *
  */
 public class ListInfoBean {
+
+	/** 通番 */
+	private int number;
 	/** 社員ID */
 	private int employeeId;
 	/** 所属会社ID */
@@ -25,6 +28,24 @@ public class ListInfoBean {
 	private String hireDate;
 	/** 稼働状況 */
 	private String commissioningStatus;
+
+	/**
+	 * 通番を取得
+	 * 
+	 * @return number
+	 */
+	public int getNumber() {
+		return number;
+	}
+
+	/**
+	 * 通番を格納
+	 * 
+	 * @param number
+	 */
+	public void setNumber(int number) {
+		this.number = number;
+	}
 
 	/**
 	 * 社員IDを取得
@@ -187,5 +208,4 @@ public class ListInfoBean {
 	public void setCommissioningStatus(String commissioningStatus) {
 		this.commissioningStatus = commissioningStatus;
 	}
-
 }
