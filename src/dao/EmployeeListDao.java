@@ -14,7 +14,6 @@ import java.util.List;
 import org.sqlite.SQLiteConfig;
 
 import beans.CompanyInfoBean;
-import beans.Department;
 import beans.ListInfoBean;
 
 /**
@@ -31,31 +30,6 @@ public class EmployeeListDao extends BaseDao {
 	CompanyInfoBean companyInfoBean = null;
 
 	/**
-	 * 各事業部に振り分ける
-	 * 
-	 * @param department
-	 */
-	private void departmentName(Department.dep department) {
-		switch (department) {
-		case Development:
-			listInfoBean.setDepartment("開発");
-			break;
-		case Network:
-			listInfoBean.setDepartment("NW");
-			break;
-		case Verification:
-			listInfoBean.setDepartment("検証");
-			break;
-		case Office:
-			listInfoBean.setDepartment("オフィス");
-			break;
-		case Management:
-			listInfoBean.setDepartment("管理");
-			break;
-		}
-	}
-
-	/**
 	 * 検索した一覧情報をdetailListに返す
 	 *
 	 * @return detailList 社員ID、会社ID、事業部、名前、ふりがな、誕生日、担当管理営業、入社日、稼働状況
@@ -67,12 +41,7 @@ public class EmployeeListDao extends BaseDao {
 		List<ListInfoBean> detailList = new ArrayList<ListInfoBean>();
 
 		// 事前準備
-		try {
-			Class.forName(DRIVER_NAME);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		Class.forName(DRIVER_NAME);
 		// 社員一覧情報を取得するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT");
@@ -106,7 +75,7 @@ public class EmployeeListDao extends BaseDao {
 			pstmt = conn.prepareStatement(sql.toString());
 			// SQLを実行
 			rs = pstmt.executeQuery();
-			
+
 			int num = 1;
 			// 一覧リストの出力方法を決める
 			while (rs.next()) {
@@ -127,13 +96,10 @@ public class EmployeeListDao extends BaseDao {
 				String companyAbbreviation = companyInfoBean.getAbbreviation();
 				listInfoBean.setAbbreviation(companyAbbreviation);
 
-				// 事業部を振り分ける
-				// SQLからとってきた"department"をdepartmentに代入
-				int department = rs.getInt("department");
-				// とってきた数値を文字列に変換してdepartmentNameに代入
-				Department.dep departmentName = Department.dep.valueOf(department);
-				// departmentNameで振り分けて事業部をlistInfoBeanにセット
-				this.departmentName(departmentName);
+				/*SQLからとってきた"department"をdepartmentに代入
+				事業部を振り分ける*/
+				String department = rs.getString("department");
+				listInfoBean.departmentName(department);
 
 				// listInfoBeanに名前をセット
 				listInfoBean.setName(rs.getString("name"));
@@ -152,23 +118,22 @@ public class EmployeeListDao extends BaseDao {
 				long age = ChronoUnit.YEARS.between(localBirthDate, nowDate);
 				// listInfoBeanに年齢をセット
 				listInfoBean.setBirthday(age);
-				
+
 				// listInfoBeanに担当営業をセット
 				listInfoBean.setBusinessManager(rs.getString("business_manager"));
-				
+
 				// listInfoBeanに入社日をセット
 				String hireDate = rs.getString("hire_date");
 				SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
-	            Date normalHireDate = sqlFormat.parse(hireDate);
-	            String formatHireDate = new SimpleDateFormat("yyyy/MM/dd").format(normalHireDate);
+				Date normalHireDate = sqlFormat.parse(hireDate);
+				String formatHireDate = new SimpleDateFormat("yyyy/MM/dd").format(normalHireDate);
 				listInfoBean.setHireDate(formatHireDate);
-				
-				// listInfoBeanに稼働状況をセット
-				if (rs.getInt("commissioning_status") == 0) {
-					listInfoBean.setCommissioningStatus("未稼働");
-				} else {
-					listInfoBean.setCommissioningStatus("稼働");
-				}
+
+				/*SQLからとってきた"commissioning_status"をcommissioningStatusに代入
+				稼働状況を振り分ける*/
+				String commissioningStatus = rs.getString("commissioning_status");
+				listInfoBean.commissioningStatusName(commissioningStatus);
+
 				// detailListに情報を追加する
 				detailList.add(listInfoBean);
 			}

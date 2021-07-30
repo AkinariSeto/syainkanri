@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.CompanyInfoBean;
+import beans.Enum.commissioningStatus;
+import beans.Enum.dep;
+import beans.Enum.sex;
+import beans.Enum.status;
 import beans.LoginInfoBean;
 import dao.CompanySelectDao;
 
@@ -73,6 +77,22 @@ public class ListRegisterServlet extends HttpServlet {
 		HttpSession session4 = request.getSession();
 		// 会社IDと略称ををセッションに保存
 		session4.setAttribute("companyInfoBeanList", companyInfoBeanList);
+		// セッション生成
+		HttpSession session6 = request.getSession();
+		// 性別をセッションに保存
+		session6.setAttribute("gender", sex.values());
+		// セッション生成
+		HttpSession session7 = request.getSession();
+		// ステータスをセッションに保存
+		session7.setAttribute("companyStatus", status.values());
+		// セッション生成
+		HttpSession session8 = request.getSession();
+		// 稼働状況をセッションに保存
+		session8.setAttribute("commissioningStatus", commissioningStatus.values());
+		// セッション生成
+		HttpSession session9 = request.getSession();
+		// 事業部をセッションに保存
+		session9.setAttribute("dep", dep.values());
 
 		// 詳細画面へフォワード
 		String nextPage;

@@ -61,8 +61,6 @@ public class LoginServlet extends HttpServlet {
 		loginInfoBean.setLoginId(loginInfoBean.getLoginId());
 		// セッション生成
 		HttpSession session = request.getSession(true);
-		// 30分でセッションを切る
-		session.setMaxInactiveInterval(1800);
 		// ログイン情報をセッションに保存
 		session.setAttribute("loginInfo", loginInfoBean);
 

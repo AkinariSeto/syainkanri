@@ -27,12 +27,7 @@ public class LoginDao extends BaseDao {
 	public LoginInfoBean findOne(String loginId, String password) throws SQLException, ClassNotFoundException {
 
 		// 事前準備
-		try {
-			Class.forName(DRIVER_NAME);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		Class.forName(DRIVER_NAME);
 		// ログイン情報Bean
 		LoginInfoBean loginInfo = null;
 
@@ -68,8 +63,10 @@ public class LoginDao extends BaseDao {
 			if (rs.next()) {
 				// ユーザー情報に取得
 				loginInfo = new LoginInfoBean();
-				loginInfo.setLoginId(rs.getString("login_id"));// ログインID。
-				loginInfo.setPassword(rs.getString("password"));// パスワード
+				// loginInfoにログインIDをセット
+				loginInfo.setLoginId(rs.getString("login_id"));
+				// loginInfoにパスワードをセット
+				loginInfo.setPassword(rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			throw new SQLException("DB接続で失敗しました。");

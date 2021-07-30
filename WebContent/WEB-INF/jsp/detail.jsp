@@ -50,10 +50,10 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label>性別</label>
-				<input type="radio" name="sex" value="0"
-					<c:if test="${detailBean.sex == 0}">checked</c:if>>男
-				<input type="radio" name="sex" value="1"
-					<c:if test="${detailBean.sex == 1}">checked</c:if>>女
+				<c:forEach var="gender" items="${gender}">
+					<input type="radio" name="sex" value="${gender.getNum()}"<c:if test="${detailBean.sex == gender.getNum()}">checked</c:if>>
+					<c:out value="${gender.getLabel()}" />
+				</c:forEach>
 			</div>
 		</div>
 		<!-- メールアドレスを取得 -->
@@ -96,18 +96,11 @@
 			<div class="form_detail">
 				<label for="division">事業部</label>
 				<select name="department" id="division">
-					<option value=""
-						<c:if test="${detailBean.department == null}">selected</c:if>></option>
-					<option value="0"
-						<c:if test="${detailBean.department == 0}">selected</c:if>>開発</option>
-					<option value="1"
-						<c:if test="${detailBean.department == 1}">selected</c:if>>NW</option>
-					<option value="2"
-						<c:if test="${detailBean.department == 2}">selected</c:if>>検証</option>
-					<option value="3"
-						<c:if test="${detailBean.department == 3}">selected</c:if>>オフィス</option>
-					<option value="4"
-						<c:if test="${detailBean.department == 4}">selected</c:if>>管理</option>
+					<c:forEach var="dep" items="${dep}">
+						<option value="${dep.getNum()}"
+							<c:if test="${detailBean.department == dep.getNum()}">selected</c:if>>
+							<c:out value="${dep.getLabel()}" /></option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -115,10 +108,10 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="commissioningStatus">稼働状況</label>
-				<input type="radio" id="commissioningStatus" name="commissioningStatus" value="1"
-					<c:if test="${detailBean.commissioningStatus == 1}">checked</c:if>>稼働
-				<input type="radio" id="commissioningStatus" name="commissioningStatus" value="0"
-					<c:if test="${detailBean.commissioningStatus == 0}">checked</c:if>>未稼働
+				<c:forEach var="commissioningStatus" items="${commissioningStatus}">
+					<input type="radio" name="commissioningStatus" value="${commissioningStatus.getNum()}"<c:if test="${detailBean.commissioningStatus == commissioningStatus.getNum()}">checked</c:if>>
+					<c:out value="${commissioningStatus.getLabel()}" />
+				</c:forEach>
 			</div>
 		</div>
 		<!-- 入社日を取得 -->
@@ -140,28 +133,25 @@
 			<div class="form_detail">
 				<label for="status">ステータス</label>
 				<select name="status" id="status">
-					<option value=""
-						<c:if test="${detailBean.status == null}">selected</c:if>></option>
-					<option value="0"
-						<c:if test="${detailBean.status == 0}">selected</c:if>>在籍</option>
-					<option value="1"
-						<c:if test="${detailBean.status == 1}">selected</c:if>>退職</option>
-					<option value="2"
-						<c:if test="${detailBean.status == 2}">selected</c:if>>入社待</option>
-					<option value="3"
-						<c:if test="${detailBean.status == 3}">selected</c:if>>入社取り消し</option>
+					<c:forEach var="companyStatus" items="${companyStatus}">
+						<option value="${companyStatus.getNum()}"
+							<c:if test="${detailBean.status == companyStatus.getNum()}">selected</c:if>>
+							<c:out value="${companyStatus.getLabel()}" /></option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
 		<div class="button">
-			<!-- 社員IDが空の場合「登録」ボタンを表示 -->
-			<c:if test="${empty detailBean.employeeId}">
-				<button name="registerBtn" onclick="return registerCheck()">登録</button>
-			</c:if>
-			<!-- 社員IDが入っている場合「更新」ボタンを表示 -->
-			<c:if test="${!empty detailBean.employeeId}">
-				<button name="updateBtn" onclick="return updateCheck()">更新</button>
-			</c:if>
+			<!-- 社員IDが空の場合「登録」ボタンを表示
+			社員IDが入っている場合「更新」ボタンを表示 -->
+			<c:choose>
+			    <c:when test="${empty detailBean.employeeId || detailBean.employeeId == null || detailBean.employeeId == ''}">
+			        <button name="registerBtn" onclick="return registerCheck()">登録</button>
+			    </c:when>
+			    <c:otherwise>
+			      	<button name="updateBtn" onclick="return updateCheck()">更新</button>
+			    </c:otherwise>
+			</c:choose>
 			<!-- 戻るボタン -->
 			<button type="button" onclick='location.href="list"'>戻る</button>
 		</div>

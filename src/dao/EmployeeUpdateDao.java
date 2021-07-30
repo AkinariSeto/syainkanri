@@ -5,8 +5,6 @@ import java.sql.SQLException;
 
 import org.sqlite.SQLiteConfig;
 
-import beans.EmployeeRegisterBean;
-
 /**
  * 更新用のクラス
  *
@@ -14,7 +12,7 @@ import beans.EmployeeRegisterBean;
  */
 public class EmployeeUpdateDao extends BaseDao {
 	/**
-	 * employee_infoの情報を更新し、EmployeeUpdateInfoに返す
+	 * employee_infoの情報を更新する。
 	 * 
 	 * @param employeeId 社員ID
 	 * @param name 名前
@@ -25,11 +23,10 @@ public class EmployeeUpdateDao extends BaseDao {
 	 * @param telephoneNumber 電話番号
 	 * @param created_id 作成者ID
 	 * @param login_id ログインID
-	 * @return employeeUpdateInfo 名前、ふりがな、誕生日、性別、メールアドレス、電話番号、ログインID、社員ID
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public EmployeeRegisterBean EmployeeUpdateInfo(String employeeId, String name, String nameHiragana, String birthday,
+	public void EmployeeUpdateInfo(String employeeId, String name, String nameHiragana, String birthday,
 			String sex, String mailAddress, String telephoneNumber, String created_id, String login_id)
 			throws SQLException, ClassNotFoundException {
 		// 事前準備
@@ -38,9 +35,6 @@ public class EmployeeUpdateDao extends BaseDao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		// 社員情報更新用Beanを初期化
-		EmployeeRegisterBean employeeUpdateInfo = null;
 
 		// employee_infoの情報を更新するSQL
 		StringBuilder sql = new StringBuilder();
@@ -112,11 +106,10 @@ public class EmployeeUpdateDao extends BaseDao {
 				conn = null;
 			}
 		}
-		return employeeUpdateInfo;
 	}
 
 	/**
-	 * employee_stateの情報を更新し、employeeUpdateStateに返す
+	 * employee_stateの情報を更新する。
 	 * 
 	 * @param employeeId 社員ID
 	 * @param companyInfoId 会社ID
@@ -127,23 +120,15 @@ public class EmployeeUpdateDao extends BaseDao {
 	 * @param retireDate 退職日
 	 * @param status ステータス
 	 * @param login_id ログインID
-	 * @return employeeUpdateState 会社ID、管理営業、事業部、稼働状況、ステータス、入社日、退職日、ログインID、社員ID
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public EmployeeRegisterBean EmployeeUpdateState(String employeeId, String companyInfoId, String businessManager,
+	public void EmployeeUpdateState(String employeeId, String companyInfoId, String businessManager,
 			String department, String commissioningStatus, String hireDate, String retireDate, String status,
 			String login_id) throws SQLException, ClassNotFoundException {
 
 		// 事前準備
-		try {
-			Class.forName(DRIVER_NAME);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		// 社員情報更新用Beanを初期化
-		EmployeeRegisterBean employeeUpdateState = null;
+		Class.forName(DRIVER_NAME);
 
 		// employee_stateの情報を更新するSQL
 		StringBuilder sql = new StringBuilder();
@@ -217,6 +202,5 @@ public class EmployeeUpdateDao extends BaseDao {
 				conn = null;
 			}
 		}
-		return employeeUpdateState;
 	}
 }

@@ -18,19 +18,14 @@ public class CompanyInfoDao extends BaseDao {
 	 * 検索した会社情報をcompanyInfoに返す
 	 * 
 	 * @param companyId 会社ID
-	 * @return companyInfo
+	 * @return companyInfo 所属会社ID、会社名、略称
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
 	public CompanyInfoBean findCompanyInfo(String companyId) throws SQLException, ClassNotFoundException {
 		ResultSet companyRs = null;
 		// 事前準備
-		try {
-			Class.forName(DRIVER_NAME);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		Class.forName(DRIVER_NAME);
 		// 会社情報Beanを初期化
 		CompanyInfoBean companyInfo = null;
 

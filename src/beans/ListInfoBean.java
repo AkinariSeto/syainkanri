@@ -2,7 +2,7 @@ package beans;
 
 /**
  * 一覧用Bean
- * 
+ *
  * @author setoakinari
  *
  */
@@ -31,8 +31,8 @@ public class ListInfoBean {
 
 	/**
 	 * 通番を取得
-	 * 
-	 * @return number
+	 *
+	 * @return number 通番
 	 */
 	public int getNumber() {
 		return number;
@@ -40,8 +40,8 @@ public class ListInfoBean {
 
 	/**
 	 * 通番を格納
-	 * 
-	 * @param number
+	 *
+	 * @param number 通番
 	 */
 	public void setNumber(int number) {
 		this.number = number;
@@ -49,8 +49,8 @@ public class ListInfoBean {
 
 	/**
 	 * 社員IDを取得
-	 * 
-	 * @return employeeId
+	 *
+	 * @return employeeId 社員ID
 	 */
 	public int getEmployeeId() {
 		return employeeId;
@@ -58,8 +58,8 @@ public class ListInfoBean {
 
 	/**
 	 * 社員IDを格納
-	 * 
-	 * @param employeeId
+	 *
+	 * @param employeeId 社員ID
 	 */
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
@@ -67,8 +67,8 @@ public class ListInfoBean {
 
 	/**
 	 * 所属会社IDを取得
-	 * 
-	 * @return abbreviation
+	 *
+	 * @return abbreviation 所属会社ID
 	 */
 	public String getAbbreviation() {
 		return abbreviation;
@@ -76,8 +76,8 @@ public class ListInfoBean {
 
 	/**
 	 * 所属会社IDを格納
-	 * 
-	 * @param abbreviation
+	 *
+	 * @param abbreviation 所属会社ID
 	 */
 	public void setAbbreviation(String abbreviation) {
 		this.abbreviation = abbreviation;
@@ -85,8 +85,8 @@ public class ListInfoBean {
 
 	/**
 	 * 事業部を取得
-	 * 
-	 * @return department
+	 *
+	 * @return department 事業部
 	 */
 	public String getDepartment() {
 		return department;
@@ -94,8 +94,8 @@ public class ListInfoBean {
 
 	/**
 	 * 事業部を格納
-	 * 
-	 * @param department
+	 *
+	 * @param department 事業部
 	 */
 	public void setDepartment(String department) {
 		this.department = department;
@@ -103,8 +103,8 @@ public class ListInfoBean {
 
 	/**
 	 * 氏名を取得
-	 * 
-	 * @return name
+	 *
+	 * @return name 氏名
 	 */
 	public String getName() {
 		return name;
@@ -112,8 +112,8 @@ public class ListInfoBean {
 
 	/**
 	 * 氏名を格納
-	 * 
-	 * @param name
+	 *
+	 * @param name 氏名
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -121,8 +121,8 @@ public class ListInfoBean {
 
 	/**
 	 * 氏名(ひらがな)を取得
-	 * 
-	 * @return nameHiragana
+	 *
+	 * @return nameHiragana 氏名(ひらがな)
 	 */
 	public String getNameHiragana() {
 		return nameHiragana;
@@ -130,8 +130,8 @@ public class ListInfoBean {
 
 	/**
 	 * 氏名(ひらがな)を格納
-	 * 
-	 * @param nameHiragana
+	 *
+	 * @param nameHiragana 氏名(ひらがな)
 	 */
 	public void setNameHiragana(String nameHiragana) {
 		this.nameHiragana = nameHiragana;
@@ -139,8 +139,8 @@ public class ListInfoBean {
 
 	/**
 	 * 生年月日を取得
-	 * 
-	 * @return birthday
+	 *
+	 * @return birthday 生年月日
 	 */
 	public long getBirthday() {
 		return birthday;
@@ -148,8 +148,8 @@ public class ListInfoBean {
 
 	/**
 	 * 生年月日格納
-	 * 
-	 * @param birthday
+	 *
+	 * @param birthday 生年月日
 	 */
 	public void setBirthday(long birthday) {
 		this.birthday = birthday;
@@ -157,8 +157,8 @@ public class ListInfoBean {
 
 	/**
 	 * 担当管理営業を取得
-	 * 
-	 * @return businessManager
+	 *
+	 * @return businessManager 担当管理営業
 	 */
 	public String getBusinessManager() {
 		return businessManager;
@@ -166,8 +166,8 @@ public class ListInfoBean {
 
 	/**
 	 * 担当管理営業を格納
-	 * 
-	 * @param businessManager
+	 *
+	 * @param businessManager 担当管理営業
 	 */
 	public void setBusinessManager(String businessManager) {
 		this.businessManager = businessManager;
@@ -175,8 +175,8 @@ public class ListInfoBean {
 
 	/**
 	 * 入社日を取得
-	 * 
-	 * @return hireDate
+	 *
+	 * @return hireDate 入社日
 	 */
 	public String getHireDate() {
 		return hireDate;
@@ -184,8 +184,8 @@ public class ListInfoBean {
 
 	/**
 	 * 入社日を格納
-	 * 
-	 * @param hireDate
+	 *
+	 * @param hireDate 入社日
 	 */
 	public void setHireDate(String hireDate) {
 		this.hireDate = hireDate;
@@ -193,8 +193,8 @@ public class ListInfoBean {
 
 	/**
 	 * 稼働状況を取得
-	 * 
-	 * @return commissioningStatus
+	 *
+	 * @return commissioningStatus 稼働状況
 	 */
 	public String getCommissioningStatus() {
 		return commissioningStatus;
@@ -202,10 +202,37 @@ public class ListInfoBean {
 
 	/**
 	 * 稼働状況を格納
-	 * 
-	 * @param commissioningStatus
+	 *
+	 * @param commissioningStatus 稼働状況
 	 */
 	public void setCommissioningStatus(String commissioningStatus) {
 		this.commissioningStatus = commissioningStatus;
+	}
+
+	
+	/**
+	 * SQLの事業部の番号とEnumの事業部の番号を比べて事業部の表示文字をセットする
+	 * @param department 事業部
+	 */
+	public void departmentName(String department) {
+		for (Enum.dep dep : Enum.dep.values()) {
+			if (department.equals(dep.getNum())) {
+				this.setDepartment(dep.getLabel());
+				break;
+			}
+		}
+	}
+
+	/**
+	 * SQLの稼働状況の番号とEnumの稼働状況の番号を比べて稼働状況の表示文字をセットする
+	 * @param commissioningStatus 稼働状況
+	 */
+	public void commissioningStatusName(String commissioningStatus) {
+		for (Enum.commissioningStatus comsta : Enum.commissioningStatus.values()) {
+			if (commissioningStatus.equals(comsta.getNum())) {
+				this.setCommissioningStatus(comsta.getLabel());
+				break;
+			}
+		}
 	}
 }

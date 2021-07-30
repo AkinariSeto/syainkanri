@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.ListInfoBean;
+import beans.LoginInfoBean;
 import dao.EmployeeListDao;
 
 @WebServlet("/list")
@@ -33,6 +35,18 @@ public class ListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
 		request.setCharacterEncoding("UTF-8");
+
+		// セッションを生成
+		HttpSession session3 = request.getSession(true);
+		// ログイン情報をとってくる
+		LoginInfoBean registerUser = (LoginInfoBean) session3.getAttribute("loginInfo");
+		// セッションが切れている場合ログインページに遷移
+		if (registerUser == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		// EmployeeListDaoを生成
 		EmployeeListDao employeeListDao = new EmployeeListDao();
 		// 一覧用リストを生成

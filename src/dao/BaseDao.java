@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 public class BaseDao {
 
 	/** DBの接続先URL */
-	public final String URL = "jdbc:sqlite:/Users/setoakinari/Documents/会社関係/初級認定試験/ninteishiken.sqlite";
+	public final String URL = "jdbc:sqlite:/Users/setoakinari/Documents/会社関係/初級認定試験/初級認定試験/ninteishiken.sqlite";
 	/** JDBCドライバ名 */
 	public final String DRIVER_NAME = "org.sqlite.JDBC";
 	/** Connectionを初期化 */

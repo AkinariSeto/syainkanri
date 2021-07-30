@@ -17,20 +17,17 @@ public class EmployeeInfoDeleteDao extends BaseDao {
 	 * employee_info、employee_stateの会社IDをそれぞれ削除する
 	 * 
 	 * @param employeeId 社員ID
+	 * @throws ClassNotFoundException 
+	 * 
 	 */
-	public void EmployeeInfoDelete(String employeeId) {
+	public void EmployeeInfoDelete(String employeeId) throws ClassNotFoundException {
 
 		// PreparedStatementを初期化
 		PreparedStatement pstmtInfo = null;
 		PreparedStatement pstmtState = null;
 
 		// 事前準備
-		try {
-			Class.forName(DRIVER_NAME);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		Class.forName(DRIVER_NAME);
 		// 主キーのIDを削除するSQL
 		StringBuilder deleteEmployeeInfo = new StringBuilder();
 		deleteEmployeeInfo.append("DELETE");

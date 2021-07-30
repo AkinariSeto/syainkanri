@@ -27,7 +27,7 @@ public class CompanyInfoBean {
 	/**
 	 * 会社IDを取得
 	 * 
-	 * @return companyId
+	 * @return companyId 会社ID
 	 */
 	public int getCompanyId() {
 		return companyId;
@@ -36,7 +36,7 @@ public class CompanyInfoBean {
 	/**
 	 * 会社IDを格納
 	 * 
-	 * @param companyId
+	 * @param companyId 会社ID
 	 */
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
@@ -45,7 +45,7 @@ public class CompanyInfoBean {
 	/**
 	 * 会社名を取得
 	 * 
-	 * @return companyName
+	 * @return companyName 会社名
 	 */
 	public String getCompanyName() {
 		return companyName;
@@ -54,7 +54,7 @@ public class CompanyInfoBean {
 	/**
 	 * 会社名を格納
 	 * 
-	 * @param companyName
+	 * @param companyName 会社名
 	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
@@ -63,7 +63,7 @@ public class CompanyInfoBean {
 	/**
 	 * 略称を取得
 	 * 
-	 * @return abbreviation
+	 * @return abbreviation 略称
 	 */
 	public String getAbbreviation() {
 		return abbreviation;
@@ -72,7 +72,7 @@ public class CompanyInfoBean {
 	/**
 	 * 略称を格納
 	 * 
-	 * @param abbreviation
+	 * @param abbreviation 略称
 	 */
 	public void setAbbreviation(String abbreviation) {
 		this.abbreviation = abbreviation;
@@ -81,7 +81,7 @@ public class CompanyInfoBean {
 	/**
 	 * 削除フラグを取得
 	 * 
-	 * @return isDeleted
+	 * @return isDeleted 削除フラグ
 	 */
 	public String getIsDeleted() {
 		return isDeleted;
@@ -90,7 +90,7 @@ public class CompanyInfoBean {
 	/**
 	 * 削除フラグを格納
 	 * 
-	 * @param isDeleted
+	 * @param isDeleted 削除フラグ
 	 */
 	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;
@@ -100,7 +100,7 @@ public class CompanyInfoBean {
 	 * 
 	 * 登録日時を取得
 	 * 
-	 * @return createDate
+	 * @return createDate 登録日時
 	 */
 	public String getCreateDate() {
 		return createDate;
@@ -109,7 +109,7 @@ public class CompanyInfoBean {
 	/**
 	 * 登録日時を格納
 	 * 
-	 * @param createDate
+	 * @param createDate 登録日時
 	 */
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
@@ -118,7 +118,7 @@ public class CompanyInfoBean {
 	/**
 	 * 更新日時を取得
 	 * 
-	 * @return modifiedDate
+	 * @return modifiedDate 更新日時
 	 */
 	public String getModifiedDate() {
 		return modifiedDate;
@@ -127,7 +127,7 @@ public class CompanyInfoBean {
 	/**
 	 * 更新日時を格納
 	 * 
-	 * @param modifiedDate
+	 * @param modifiedDate 更新日時
 	 */
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
@@ -136,7 +136,7 @@ public class CompanyInfoBean {
 	/**
 	 * 登録者IDを取得
 	 * 
-	 * @return createId
+	 * @return createId 登録者ID
 	 */
 	public String getCreateId() {
 		return createId;
@@ -145,7 +145,7 @@ public class CompanyInfoBean {
 	/**
 	 * 登録者IDを格納
 	 * 
-	 * @param createId
+	 * @param createId 登録者ID
 	 */
 	public void setCreateId(String createId) {
 		this.createId = createId;
@@ -154,7 +154,7 @@ public class CompanyInfoBean {
 	/**
 	 * 更新者IDを取得
 	 * 
-	 * @return modifiedId
+	 * @return modifiedId 更新者ID
 	 */
 	public String getModifiedId() {
 		return modifiedId;
@@ -163,7 +163,7 @@ public class CompanyInfoBean {
 	/**
 	 * 更新者IDを格納
 	 * 
-	 * @param modifiedId
+	 * @param modifiedId 更新者ID
 	 */
 	public void setModifiedId(String modifiedId) {
 		this.modifiedId = modifiedId;
