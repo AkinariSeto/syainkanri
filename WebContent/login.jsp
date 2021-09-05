@@ -13,7 +13,7 @@
 <body>
 	<h1>社員管理システム</h1>
 	<!-- ログインID、パスワードが間違っていた場合エラーメッセージを表示 -->
-	<a id="error" style="background-color: red; color: #fff;">${message}</a>
+	<a id="error">${message}</a>
 	<!-- ログインID、パスワードのフォーム -->
 	<form action="login" method="post">
 		<div class="form_contents">

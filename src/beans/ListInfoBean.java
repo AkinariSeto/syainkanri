@@ -208,31 +208,4 @@ public class ListInfoBean {
 	public void setCommissioningStatus(String commissioningStatus) {
 		this.commissioningStatus = commissioningStatus;
 	}
-
-	
-	/**
-	 * SQLの事業部の番号とEnumの事業部の番号を比べて事業部の表示文字をセットする
-	 * @param department 事業部
-	 */
-	public void departmentName(String department) {
-		for (Enum.dep dep : Enum.dep.values()) {
-			if (department.equals(dep.getNum())) {
-				this.setDepartment(dep.getLabel());
-				break;
-			}
-		}
-	}
-
-	/**
-	 * SQLの稼働状況の番号とEnumの稼働状況の番号を比べて稼働状況の表示文字をセットする
-	 * @param commissioningStatus 稼働状況
-	 */
-	public void commissioningStatusName(String commissioningStatus) {
-		for (Enum.commissioningStatus comsta : Enum.commissioningStatus.values()) {
-			if (commissioningStatus.equals(comsta.getNum())) {
-				this.setCommissioningStatus(comsta.getLabel());
-				break;
-			}
-		}
-	}
 }

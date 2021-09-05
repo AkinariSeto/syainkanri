@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dao.EmployeeInfoDeleteDao;
+import beans.LoginInfoBean;
+import dao.EmployeeListDao;
 
 @WebServlet("/delete")
 /**
@@ -25,14 +27,24 @@ public class DeleteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
 		request.setCharacterEncoding("UTF-8");
+		// セッションを生成
+		HttpSession session = request.getSession(true);
+		// ログイン情報をとってくる
+		LoginInfoBean registerUser = (LoginInfoBean) session.getAttribute("loginInfo");
+		// セッションが切れている場合ログインページに遷移
+		if (registerUser == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 		// employeeIdのリクエストパラメーターを取得
 		String employeeId = request.getParameter("empId");
-		// EmployeeInfoDeleteDaoをインスタンス化
-		EmployeeInfoDeleteDao employeeInfoDeleteDao = new EmployeeInfoDeleteDao();
+		EmployeeListDao employeeListDao = new EmployeeListDao();
 
 		try {
 			// employeeIdの削除を実行
-			employeeInfoDeleteDao.EmployeeInfoDelete(employeeId);
+			employeeListDao.EmployeeInfoDelete(employeeId);
 		} catch (Exception e) {
 			throw new ServletException(e.getMessage());
 		}
@@ -44,6 +56,5 @@ public class DeleteServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

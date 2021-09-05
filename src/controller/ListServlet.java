@@ -37,9 +37,9 @@ public class ListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// セッションを生成
-		HttpSession session3 = request.getSession(true);
+		HttpSession session = request.getSession(true);
 		// ログイン情報をとってくる
-		LoginInfoBean registerUser = (LoginInfoBean) session3.getAttribute("loginInfo");
+		LoginInfoBean registerUser = (LoginInfoBean) session.getAttribute("loginInfo");
 		// セッションが切れている場合ログインページに遷移
 		if (registerUser == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
@@ -47,9 +47,7 @@ public class ListServlet extends HttpServlet {
 			return;
 		}
 
-		// EmployeeListDaoを生成
 		EmployeeListDao employeeListDao = new EmployeeListDao();
-		// 一覧用リストを生成
 		List<ListInfoBean> infoBeanList = new ArrayList<ListInfoBean>();
 		try {
 			// 一覧用の情報を検索
@@ -57,12 +55,9 @@ public class ListServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// セッションを生成
-		HttpSession session1 = request.getSession(true);
+
 		// recordInsertedSuccessfullyを削除
-		session1.removeAttribute("recordInsertedSuccessfully");
-		// セッション生成
-		HttpSession session = request.getSession();
+		session.removeAttribute("recordInsertedSuccessfully");
 		// 一覧用の情報をセッションに保存
 		session.setAttribute("InfoBeanList", infoBeanList);
 		// 一覧画面へ遷移

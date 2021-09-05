@@ -14,13 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import beans.CompanyInfoBean;
 import beans.DetailBean;
-import beans.Enum.commissioningStatus;
-import beans.Enum.dep;
-import beans.Enum.sex;
-import beans.Enum.status;
 import beans.LoginInfoBean;
-import dao.CompanySelectDao;
-import dao.DetailDao;
+import dao.EmployeeDetailDao;
+import enums.CommissioningStatusEnum.commissioningStatus;
+import enums.DepartmentEnum.dep;
+import enums.SexEnum.sex;
+import enums.StatusEnum.status;
 
 @WebServlet("/detail")
 /**
@@ -38,9 +37,9 @@ public class ListDetailServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// セッションを生成
-		HttpSession session3 = request.getSession(true);
+		HttpSession session = request.getSession(true);
 		// ログイン情報をとってくる
-		LoginInfoBean registerUser = (LoginInfoBean) session3.getAttribute("loginInfo");
+		LoginInfoBean registerUser = (LoginInfoBean) session.getAttribute("loginInfo");
 		// セッションが切れている場合ログインページに遷移
 		if (registerUser == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
@@ -48,51 +47,35 @@ public class ListDetailServlet extends HttpServlet {
 			return;
 		}
 
-		// CompanySelectDaoをインスタンス化
-		CompanySelectDao companySelectDao = new CompanySelectDao();
 		// 会社情報をリストにしたものをインスタンス化
 		List<CompanyInfoBean> companyInfoBeanList = new ArrayList<CompanyInfoBean>();
 
 		// employeeIdのリクエストパラメーターを取得
 		String employeeId = request.getParameter("empId");
 
-		// DetailDaoをインスタンス化
-		DetailDao detailDao = new DetailDao();
-		// DetailBeanをインスタンス化
+		EmployeeDetailDao employeeRegisterDao = new EmployeeDetailDao();
 		DetailBean detailBean = new DetailBean();
 		try {
 			// 詳細情報を取得したものを代入
-			detailBean = detailDao.Detail(employeeId);
+			detailBean = employeeRegisterDao.Detail(employeeId);
 			// 会社情報を取得し、companyInfoBeanListに代入
-			companyInfoBeanList = companySelectDao.findCompany();
+			companyInfoBeanList = employeeRegisterDao.findCompany();
 		} catch (Exception e) {
 			throw new ServletException(e.getMessage());
 		}
 
-		// セッション生成
-		HttpSession session = request.getSession();
 		// 会社情報をセッションに保存
 		session.setAttribute("companyInfoBeanList", companyInfoBeanList);
-		// セッション生成
-		HttpSession session2 = request.getSession();
 		// 詳細情報をセッションに保存
-		session2.setAttribute("detailBean", detailBean);
-		// セッション生成
-		HttpSession session4 = request.getSession();
+		session.setAttribute("detailBean", detailBean);
 		// 性別をセッションに保存
-		session4.setAttribute("gender", sex.values());
-		// セッション生成
-		HttpSession session5 = request.getSession();
+		session.setAttribute("gender", sex.values());
 		// ステータスをセッションに保存
-		session5.setAttribute("companyStatus", status.values());
-		// セッション生成
-		HttpSession session6 = request.getSession();
+		session.setAttribute("companyStatus", status.values());
 		// 稼働状況をセッションに保存
-		session6.setAttribute("commissioningStatus", commissioningStatus.values());
-		// セッション生成
-		HttpSession session9 = request.getSession();
+		session.setAttribute("commissioningStatus", commissioningStatus.values());
 		// 事業部をセッションに保存
-		session9.setAttribute("dep", dep.values());
+		session.setAttribute("dep", dep.values());
 
 		// 詳細へ遷移
 		request.getRequestDispatcher("/WEB-INF/jsp/detail.jsp").forward(request, response);
@@ -100,6 +83,5 @@ public class ListDetailServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

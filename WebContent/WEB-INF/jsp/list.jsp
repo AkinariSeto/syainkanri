@@ -19,7 +19,8 @@
 	<!-- 画面タイトル -->
 	<h1>社員一覧</h1>
 	<!-- 新規登録ボタンフォーム -->
-	<form action="ListRegisterServlet" method="get">
+	<!-- <form action="ListRegisterServlet" method="get"> -->
+	<form action="detail" method="get">
 		<button type="submit">新規登録</button>
 	</form>
 	<!-- 一覧画面 -->
@@ -74,7 +75,7 @@
 				<td><a href="detail?empId=${InfoBeanList.employeeId}">詳細</a></td>
 				<!-- 削除リンク -->
 				<td><a href="delete?empId=${InfoBeanList.employeeId}"
-					onclick="return deleteCheck()">削除</a></td>
+					onclick="return deleteCheck('${InfoBeanList.abbreviation}', '${InfoBeanList.name}')">削除</a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -82,8 +83,8 @@
 	<!-- バリデーション -->
 	<script type="text/javascript">
 		/* 削除バリデーション */
-		function deleteCheck() {
-			if (window.confirm('削除しますか？')) {
+		function deleteCheck(abbreviation, name) {
+			if (window.confirm(abbreviation + name + 'を削除しますか？')) {
 				return true;
 			} else {
 				return false;

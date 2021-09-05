@@ -36,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
-		// ログインDaoを生成
 		LoginDao loginDao = new LoginDao();
 		// LoginInfoBeanを初期化
 		LoginInfoBean loginInfoBean = null;

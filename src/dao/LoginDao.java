@@ -46,8 +46,6 @@ public class LoginDao extends BaseDao {
 			SQLiteConfig config = new SQLiteConfig();
 			// 外部キー制約を有効にする
 			config.enforceForeignKeys(true);
-			// ドライバクラスのロード
-			Class.forName(DRIVER_NAME);
 			// Connectionを生成
 			conn = DriverManager.getConnection(URL, config.toProperties());
 			// PreparedStatementを生成
@@ -69,7 +67,7 @@ public class LoginDao extends BaseDao {
 				loginInfo.setPassword(rs.getString("password"));
 			}
 		} catch (SQLException e) {
-			throw new SQLException("DB接続で失敗しました。");
+			e.printStackTrace();
 		} finally {
 			// リソースを開放
 			if (rs != null) {
@@ -77,6 +75,7 @@ public class LoginDao extends BaseDao {
 					// ResultSetを閉じる
 					rs.close();
 				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 				rs = null;
 			}
@@ -85,6 +84,7 @@ public class LoginDao extends BaseDao {
 					// PreparedStatementを閉じる
 					pstmt.close();
 				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 				pstmt = null;
 			}
@@ -93,6 +93,7 @@ public class LoginDao extends BaseDao {
 					// Connectionを閉じる
 					conn.close();
 				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 				conn = null;
 			}

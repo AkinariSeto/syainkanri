@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +17,8 @@ import org.sqlite.SQLiteConfig;
 
 import beans.CompanyInfoBean;
 import beans.ListInfoBean;
+import enums.CommissioningStatusEnum;
+import enums.DepartmentEnum;
 
 /**
  * 一覧ページに関する情報を検索するクラス
@@ -23,12 +27,10 @@ import beans.ListInfoBean;
  */
 public class EmployeeListDao extends BaseDao {
 
-	// 一覧情報Beanを初期化
 	ListInfoBean listInfoBean = null;
 
-	// 会社情報Beanを初期化
 	CompanyInfoBean companyInfoBean = null;
-
+	
 	/**
 	 * 検索した一覧情報をdetailListに返す
 	 *
@@ -37,9 +39,9 @@ public class EmployeeListDao extends BaseDao {
 	 * @throws ClassNotFoundException
 	 */
 	public List<ListInfoBean> EmployeeListInfo() throws SQLException, ClassNotFoundException {
-		// 一覧リストを生成
+		
 		List<ListInfoBean> detailList = new ArrayList<ListInfoBean>();
-
+		
 		// 事前準備
 		Class.forName(DRIVER_NAME);
 		// 社員一覧情報を取得するSQL
@@ -67,39 +69,30 @@ public class EmployeeListDao extends BaseDao {
 			SQLiteConfig config = new SQLiteConfig();
 			// 外部キー制約を有効にする
 			config.enforceForeignKeys(true);
-			// ドライバクラスのロード
-			Class.forName(DRIVER_NAME);
 			// Connectionを生成
 			conn = DriverManager.getConnection(URL, config.toProperties());
 			// PreparedStatementを生成
 			pstmt = conn.prepareStatement(sql.toString());
 			// SQLを実行
 			rs = pstmt.executeQuery();
-
 			int num = 1;
 			// 一覧リストの出力方法を決める
 			while (rs.next()) {
-				// listInfoBeanを生成
 				listInfoBean = new ListInfoBean();
 				// listInfoBeanに通番をセット
 				listInfoBean.setNumber(num);
 				num++;
 				// listInfoBeanに社員IDをセット
 				listInfoBean.setEmployeeId(rs.getInt("employee_id"));
-				// CompanyInfoDaoを生成
-				CompanyInfoDao companyInfoDao = new CompanyInfoDao();
-				// companyInfoBeanを生成
 				companyInfoBean = new CompanyInfoBean();
 				// companyInfoBeanに会社IDをセット
-				companyInfoBean = companyInfoDao.findCompanyInfo(rs.getString("company_info_id"));
+				companyInfoBean = this.findCompanyInfo(rs.getString("company_info_id"));
 				// 会社略称をlistInfoBeanにセット
 				String companyAbbreviation = companyInfoBean.getAbbreviation();
 				listInfoBean.setAbbreviation(companyAbbreviation);
 
-				/*SQLからとってきた"department"をdepartmentに代入
-				事業部を振り分ける*/
-				String department = rs.getString("department");
-				listInfoBean.departmentName(department);
+				// listInfoBeanに事業部をセット
+				listInfoBean.setDepartment(DepartmentEnum.departmentName(rs.getString("department")));
 
 				// listInfoBeanに名前をセット
 				listInfoBean.setName(rs.getString("name"));
@@ -129,16 +122,12 @@ public class EmployeeListDao extends BaseDao {
 				String formatHireDate = new SimpleDateFormat("yyyy/MM/dd").format(normalHireDate);
 				listInfoBean.setHireDate(formatHireDate);
 
-				/*SQLからとってきた"commissioning_status"をcommissioningStatusに代入
-				稼働状況を振り分ける*/
-				String commissioningStatus = rs.getString("commissioning_status");
-				listInfoBean.commissioningStatusName(commissioningStatus);
+				// listInfoBeanに稼働状況をセット
+				listInfoBean.setCommissioningStatus(CommissioningStatusEnum.commissioningStatusName(rs.getString("commissioning_status")));
 
 				// detailListに情報を追加する
 				detailList.add(listInfoBean);
 			}
-		} catch (SQLException e) {
-			throw new SQLException(e);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {
@@ -148,6 +137,7 @@ public class EmployeeListDao extends BaseDao {
 					// ResultSetを閉じる
 					rs.close();
 				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 				rs = null;
 			}
@@ -156,6 +146,7 @@ public class EmployeeListDao extends BaseDao {
 					// PreparedStatementを閉じる
 					pstmt.close();
 				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 				pstmt = null;
 			}
@@ -164,10 +155,184 @@ public class EmployeeListDao extends BaseDao {
 					// Connectionを閉じる
 					conn.close();
 				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 				conn = null;
 			}
 		}
 		return detailList;
+	}
+	/**
+	 * employee_info、employee_stateの会社IDをそれぞれ削除する
+	 * 
+	 * @param employeeId 社員ID
+	 * @throws ClassNotFoundException 
+	 * 
+	 */
+	public void EmployeeInfoDelete(String employeeId) throws ClassNotFoundException {
+
+		// PreparedStatementを初期化
+		PreparedStatement pstmtInfo = null;
+		PreparedStatement pstmtState = null;
+
+		// 事前準備
+		Class.forName(DRIVER_NAME);
+		// 主キーのIDを削除するSQL
+		StringBuilder deleteEmployeeInfo = new StringBuilder();
+		deleteEmployeeInfo.append("DELETE");
+		deleteEmployeeInfo.append(" FROM");
+		deleteEmployeeInfo.append(" employee_info");
+		deleteEmployeeInfo.append(" WHERE");
+		deleteEmployeeInfo.append(" employee_id = ?");
+
+		// 子キーのIDを削除するSQL
+		StringBuilder deleteEmployeeState = new StringBuilder();
+		deleteEmployeeState.append("DELETE");
+		deleteEmployeeState.append(" FROM");
+		deleteEmployeeState.append(" employee_state");
+		deleteEmployeeState.append(" WHERE");
+		deleteEmployeeState.append(" employee_info_id = ?");
+		try {
+			SQLiteConfig config = new SQLiteConfig();
+			// 外部キー制約を有効にする
+			config.enforceForeignKeys(true);
+			// Connectionを生成
+			conn = DriverManager.getConnection(URL, config.toProperties());
+			// 送信すべきSQL文の雛形
+			pstmtInfo = conn.prepareStatement(deleteEmployeeInfo.toString());
+			pstmtInfo.setString(1, employeeId);
+			pstmtState = conn.prepareStatement(deleteEmployeeState.toString());
+			pstmtState.setString(1, employeeId);
+			// 子キーのIDを削除
+			pstmtState.executeUpdate();
+			// 親キーのIDを削除
+			pstmtInfo.executeUpdate();
+			// トランザクションのコミット
+			conn.commit();
+
+		} catch (SQLException e) {
+			try {
+				// トランザクションのロールバック
+				conn.rollback();
+			} catch (SQLException e2) {
+				// 接続や、SQL処理失敗時の処理
+				e2.printStackTrace();
+			}
+		} finally {
+			// データベース接続の切断
+			if (conn != null) {
+				try {
+					// オートコミット有効化
+					conn.setAutoCommit(true);
+					// データベース接続の切断
+					conn.close();
+				} catch (SQLException e) {
+					// 接続失敗時の処理
+					e.printStackTrace();
+				}
+			}
+			if (pstmtInfo != null) {
+				try {
+					// PreparedStatementを閉じる
+					pstmtInfo.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				pstmtInfo = null;
+			}
+			if (pstmtState != null) {
+				try {
+					// PreparedStatementを閉じる
+					pstmtState.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				pstmtState = null;
+			}
+		}
+	}
+	/**
+	 * 検索した会社情報をcompanyInfoに返す
+	 * 
+	 * @param companyId 会社ID
+	 * @return companyInfo 所属会社ID、会社名、略称
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public CompanyInfoBean findCompanyInfo(String companyId) throws SQLException, ClassNotFoundException {
+		ResultSet companyRs = null;
+		// 事前準備
+		Class.forName(DRIVER_NAME);
+		// 会社情報Beanを初期化
+		CompanyInfoBean companyInfo = null;
+
+		// 会社IDから会社情報を取得するSQL
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT");
+		sql.append(" company_id,");
+		sql.append(" company_name,");
+		sql.append(" abbreviation");
+		sql.append(" FROM");
+		sql.append(" company_info");
+		sql.append(" WHERE");
+		sql.append(" company_id = ?");
+
+		try {
+			SQLiteConfig config = new SQLiteConfig();
+			// 外部キー制約を有効にする
+			config.enforceForeignKeys(true);
+			// Connectionを生成
+			conn = DriverManager.getConnection(URL, config.toProperties());
+			// PreparedStatementを生成
+			pstmt = conn.prepareStatement(sql.toString());
+			// 1番目のプレースホルダにパラメータを設定
+			pstmt.setString(1, companyId);
+
+			// SQLを実行
+			companyRs = pstmt.executeQuery();
+
+			// 検索結果が見つかった場合
+			if (companyRs.next()) {
+				companyInfo = new CompanyInfoBean();
+				// 会社IDをセット
+				companyInfo.setCompanyId(companyRs.getInt("company_id"));
+				// 会社名をセット
+				companyInfo.setCompanyName(companyRs.getString("company_name"));
+				// 会社略称をセット
+				companyInfo.setAbbreviation(companyRs.getString("abbreviation"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// リソースを開放
+			if (companyRs != null) {
+				try {
+					// ResultSetを閉じる
+					companyRs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				companyRs = null;
+			}
+			if (pstmt != null) {
+				try {
+					// PreparedStatementを閉じる
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+			if (conn != null) {
+				try {
+					// Connectionを閉じる
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				conn = null;
+			}
+		}
+		return companyInfo;
 	}
 }

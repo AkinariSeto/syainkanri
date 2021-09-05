@@ -4,6 +4,15 @@ h1 {
     text-align: center;
 }
 
+#validation {
+	text-align: center;
+}
+
+#validation_message {
+	color: #fff;
+	background-color: red;
+}
+
 form {
     margin: 0 auto;
     width: 360px;

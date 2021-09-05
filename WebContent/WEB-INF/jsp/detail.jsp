@@ -17,8 +17,8 @@
 	<h1>社員詳細</h1>
 
 	<!-- バリデーションメッセージ -->
-	<div style="text-align: center;">
-		<a style="background-color: red; color: #fff;">${errorMessage}</a>
+	<div id="validation">
+		<a id="validation_message">${errorMessage}</a>
 	</div>
 
 	<!-- 新規登録、更新のフォーム -->
