@@ -19,7 +19,6 @@
 	<!-- 画面タイトル -->
 	<h1>社員一覧</h1>
 	<!-- 新規登録ボタンフォーム -->
-	<!-- <form action="ListRegisterServlet" method="get"> -->
 	<form action="detail" method="get">
 		<button type="submit">新規登録</button>
 	</form>

@@ -198,6 +198,8 @@ public class EmployeeListDao extends BaseDao {
 			config.enforceForeignKeys(true);
 			// Connectionを生成
 			conn = DriverManager.getConnection(URL, config.toProperties());
+			// オートコミット機能を無効化
+			conn.setAutoCommit(false);
 			// 送信すべきSQL文の雛形
 			pstmtInfo = conn.prepareStatement(deleteEmployeeInfo.toString());
 			pstmtInfo.setString(1, employeeId);
@@ -219,18 +221,6 @@ public class EmployeeListDao extends BaseDao {
 				e2.printStackTrace();
 			}
 		} finally {
-			// データベース接続の切断
-			if (conn != null) {
-				try {
-					// オートコミット有効化
-					conn.setAutoCommit(true);
-					// データベース接続の切断
-					conn.close();
-				} catch (SQLException e) {
-					// 接続失敗時の処理
-					e.printStackTrace();
-				}
-			}
 			if (pstmtInfo != null) {
 				try {
 					// PreparedStatementを閉じる
@@ -248,6 +238,18 @@ public class EmployeeListDao extends BaseDao {
 					e.printStackTrace();
 				}
 				pstmtState = null;
+			}
+			// データベース接続の切断
+			if (conn != null) {
+				try {
+					// オートコミット有効化
+					conn.setAutoCommit(true);
+					// データベース接続の切断
+					conn.close();
+				} catch (SQLException e) {
+					// 接続失敗時の処理
+					e.printStackTrace();
+				}
 			}
 		}
 	}
