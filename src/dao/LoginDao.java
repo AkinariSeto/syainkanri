@@ -1,9 +1,6 @@
 package dao;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import org.sqlite.SQLiteConfig;
 
 import beans.LoginInfoBean;
 
@@ -20,14 +17,12 @@ public class LoginDao extends BaseDao {
 	 * 
 	 * @param loginId ログインID
 	 * @param password パスワード
-	 * @return loginInfo ログインID、パスワード
+	 * @return loginInfo ログインID
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
 	public LoginInfoBean findOne(String loginId, String password) throws SQLException, ClassNotFoundException {
 
-		// 事前準備
-		Class.forName(DRIVER_NAME);
 		// ログイン情報Bean
 		LoginInfoBean loginInfo = null;
 
@@ -43,11 +38,8 @@ public class LoginDao extends BaseDao {
 		sql.append(" AND password = ?");
 
 		try {
-			SQLiteConfig config = new SQLiteConfig();
-			// 外部キー制約を有効にする
-			config.enforceForeignKeys(true);
-			// Connectionを生成
-			conn = DriverManager.getConnection(URL, config.toProperties());
+			// DBへ接続
+			open();
 			// PreparedStatementを生成
 			pstmt = conn.prepareStatement(sql.toString());
 			// 1番目のプレースホルダにパラメータを設定
@@ -63,8 +55,6 @@ public class LoginDao extends BaseDao {
 				loginInfo = new LoginInfoBean();
 				// loginInfoにログインIDをセット
 				loginInfo.setLoginId(rs.getString("login_id"));
-				// loginInfoにパスワードをセット
-				loginInfo.setPassword(rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

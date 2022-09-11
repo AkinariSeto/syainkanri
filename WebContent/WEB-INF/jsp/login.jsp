@@ -21,12 +21,12 @@
 				<!-- ログインID -->
 				<li>
 					<label for="loginId">ログインID</label>
-					<input type="text" size="30" id="loginId" name="loginId"  maxlength='20'>
+					<input type="text" size="20" id="loginId" name="loginId"  maxlength='20'>
 				</li>
 				<!-- パスワード -->
 				<li class="pass">
 					<label for="password">パスワード</label>
-					<input type="password" size="30" id="password" name="password"  maxlength='20'>
+					<input type="password" size="20" id="password" name="password"  maxlength='20'>
 				</li>
 			</ul>
 		</div>

@@ -50,10 +50,10 @@
 			<th>削除</th>
 		</tr>
 		<!-- 一覧を出力 -->
-		<c:forEach var="InfoBeanList" items="${InfoBeanList}">
+		<c:forEach var="InfoBeanList" items="${InfoBeanList}" varStatus="number">
 			<tr>
 				<!-- 社員IDを出力 -->
-				<td><c:out value="${InfoBeanList.number}" /></td>
+				<td><c:out value="${number.count}" /></td>
 				<!-- 会社略称を出力 -->
 				<td><c:out value="${InfoBeanList.abbreviation}" /></td>
 				<!-- 事業部を出力 -->
@@ -67,7 +67,7 @@
 				<!-- 担当管理営業を出力 -->
 				<td><c:out value="${InfoBeanList.businessManager}" /></td>
 				<!-- 入社日を出力 -->
-				<td><c:out value="${InfoBeanList.hireDate}" /></td>
+				<td><c:out value="${InfoBeanList.enterDate}" /></td>
 				<!-- 稼働状況を出力 -->
 				<td><c:out value="${InfoBeanList.commissioningStatus}" /></td>
 				<!-- 詳細リンク -->

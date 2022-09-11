@@ -9,13 +9,12 @@ h1 {
 }
 
 #validation_message {
-	color: #fff;
-	background-color: red;
+	color: red;
 }
 
 form {
     margin: 0 auto;
-    width: 360px;
+    width: 400px;
     padding: 1em;
 }
 
@@ -24,10 +23,16 @@ form {
     list-style: none;
 }
 
+label,.form_detail {
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+}
 .form_detail {
     border-bottom: solid 1px #000;
     border-left: solid 1px #000;
-    border-right: solid 1px #000
+    border-right: solid 1px #000;
+    font-size: 19px;
 }
 
 .form_top {
@@ -35,25 +40,34 @@ form {
 }
 
 label {
-    display: inline-block;
     width: 140px;
     height: 35px;
     background-color: #d4e1f5;
     border-right: solid 1px #000;
-    justify-content: center;
-    align-items: center;
 }
 
-input {
-    border: solid 1px #000;
-    border-radius: 4px;
+.input_width {
+	width: 150px;
+}
+
+.status_width {
+	width: 156px;
+}
+
+input,select {
+	border :1px solid;
+	border-radius: 4px;
+	font-size :19px;
+	margin-left: 8px;
 }
 
 .button {
     text-align: center;
     margin-top: 20px;
 }
-button{
-    width: 90px;
-    margin:0 40px;
+
+button {
+	width: 115px;
+	margin: 0 40px;
+	font-size: 19px;
 }

@@ -1,4 +1,4 @@
-package login;
+package controller;
 
 import java.io.IOException;
 
@@ -10,23 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Logout
+ * ログアウトしログイン画面へ遷移するクラス
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * セッションを切ってログアウトし、ログイン画面へ遷移。
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// セッションを切ってログアウト
 		HttpSession session = request.getSession();
 		session.invalidate();
 		// ログイン画面へ遷移
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

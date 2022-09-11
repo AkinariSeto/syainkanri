@@ -1,8 +1,12 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.sqlite.SQLiteConfig;
 
 /**
  * データベース接続で使うスーパークラス
@@ -16,9 +20,24 @@ public class BaseDao {
 	/** JDBCドライバ名 */
 	public final String DRIVER_NAME = "org.sqlite.JDBC";
 	/** Connectionを初期化 */
-	public static Connection conn = null;
+	protected Connection conn = null;
 	/** PreparedStatementを初期化 */
-	public static PreparedStatement pstmt = null;
+	protected PreparedStatement pstmt = null;
 	/** ResultSetを初期化 */
-	public static ResultSet rs = null;
+	protected ResultSet rs = null;
+
+	/**
+	 * DBへ接続する
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	protected void open() throws ClassNotFoundException, SQLException {
+		// 事前準備
+		Class.forName(DRIVER_NAME);
+		SQLiteConfig config = new SQLiteConfig();
+		// 外部キー制約を有効にする
+		config.enforceForeignKeys(true);
+		// Connectionを生成
+		conn = DriverManager.getConnection(URL, config.toProperties());
+	}
 }

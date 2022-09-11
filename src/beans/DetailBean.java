@@ -1,12 +1,12 @@
 package beans;
 
 /**
- * 社員情報、状況Bean
+ * 
+ * 詳細Bean
  * 
  * @author setoakinari
- *
  */
-public class EmployeeInfoStateBean {
+public class DetailBean {
 
 	/** 社員ID */
 	private int employeeId;
@@ -22,19 +22,8 @@ public class EmployeeInfoStateBean {
 	private String mailAddress;
 	/** 電話番号 */
 	private String telephoneNumber;
-	/** 削除フラグ */
-	private String isDeleted;
-	/** 登録日時 */
-	private String createdDate;
-	/** 更新日時 */
-	private String modifiedDate;
-	/** 登録者ID */
-	private String createdId;
-	/** 更新者ID */
-	private String modifiedId;
-	// ここからstate
-	/** 社員ID */
-	private int employeeInfoId;
+	/** 所属会社ID */
+	private int companyId;
 	/** 所属会社ID */
 	private int companyInfoId;
 	/** 担当管理営業 */
@@ -43,26 +32,26 @@ public class EmployeeInfoStateBean {
 	private String department;
 	/** 稼働状況 */
 	private String commissioningStatus;
-	/** ステータス */
-	private String status;
 	/** 入社日 */
-	private String hireDate;
+	private String enterDate;
 	/** 退職日 */
 	private String retireDate;
+	/** ステータス */
+	private String status;
 
 	/**
-	 * 社員IDを取得
+	 * 会社IDを取得
 	 * 
-	 * @return employeeId
+	 * @return companyId 会社ID
 	 */
 	public int getEmployeeId() {
 		return employeeId;
 	}
 
 	/**
-	 * 社員IDを格納
+	 * 会社IDを格納
 	 * 
-	 * @param employeeId
+	 * @param companyId 会社ID
 	 */
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
@@ -71,7 +60,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 氏名を取得
 	 * 
-	 * @return name
+	 * @return name 氏名
 	 */
 	public String getName() {
 		return name;
@@ -80,7 +69,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 氏名を格納
 	 * 
-	 * @param name
+	 * @param name 氏名
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -89,7 +78,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 氏名(ひらがな)を取得
 	 * 
-	 * @return nameHiragana
+	 * @return nameHiragana 氏名(ひらがな)
 	 */
 	public String getNameHiragana() {
 		return nameHiragana;
@@ -98,7 +87,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 氏名(ひらがな)を格納
 	 * 
-	 * @param nameHiragana
+	 * @param nameHiragana 氏名(ひらがな)
 	 */
 	public void setNameHiragana(String nameHiragana) {
 		this.nameHiragana = nameHiragana;
@@ -107,7 +96,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 生年月日を取得
 	 * 
-	 * @return birthday
+	 * @return birthday 生年月日
 	 */
 	public String getBirthday() {
 		return birthday;
@@ -116,7 +105,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 生年月日格納
 	 * 
-	 * @param birthday
+	 * @param birthday 生年月日
 	 */
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
@@ -125,7 +114,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 性別を取得
 	 * 
-	 * @return sex
+	 * @return sex 性別
 	 */
 	public String getSex() {
 		return sex;
@@ -134,7 +123,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 性別を格納
 	 * 
-	 * @param sex
+	 * @param sex 性別
 	 */
 	public void setSex(String sex) {
 		this.sex = sex;
@@ -143,7 +132,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * メールアドレスを取得
 	 * 
-	 * @return mailAddress
+	 * @return mailAddress メールアドレス
 	 */
 	public String getMailAddress() {
 		return mailAddress;
@@ -152,7 +141,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * メールアドレスを格納
 	 * 
-	 * @param mailAddress
+	 * @param mailAddress メールアドレス
 	 */
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
@@ -161,7 +150,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 電話番号を取得
 	 * 
-	 * @return telephoneNumber
+	 * @return telephoneNumber 電話番号
 	 */
 	public String getTelephoneNumber() {
 		return telephoneNumber;
@@ -170,125 +159,34 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 電話番号を格納
 	 * 
-	 * @param telephoneNumber
+	 * @param telephoneNumber 電話番号
 	 */
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
 	}
 
 	/**
-	 * 削除フラグを取得
-	 * 
-	 * @return isDeleted
-	 */
-	public String getIsDeleted() {
-		return isDeleted;
-	}
-
-	/**
-	 * 削除フラグを格納
-	 * 
-	 * @param isDeleted
-	 */
-	public void setIsDeleted(String isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	/**
-	 * 登録日時を取得
-	 * 
-	 * @return createdDate
-	 */
-	public String getCreatedDate() {
-		return createdDate;
-	}
-
-	/**
-	 * 登録日時を格納
-	 * 
-	 * @param createdDate
-	 */
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	/**
-	 * 更新日時を取得
-	 * 
-	 * @return modifiedDate
-	 */
-	public String getModifiedDate() {
-		return modifiedDate;
-	}
-
-	/**
-	 * 更新日時を格納
-	 * 
-	 * @param modifiedDate
-	 */
-	public void setModifiedDate(String modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	/**
-	 * 登録者IDを取得
-	 * 
-	 * @return createdId
-	 */
-	public String getCreatedId() {
-		return createdId;
-	}
-
-	/**
-	 * 登録者IDを格納
-	 * 
-	 * @param createdId
-	 */
-	public void setCreatedId(String createdId) {
-		this.createdId = createdId;
-	}
-
-	/**
-	 * 更新者IDを取得
-	 * 
-	 * @return modifiedId
-	 */
-	public String getModifiedId() {
-		return modifiedId;
-	}
-
-	/**
-	 * 更新者IDを格納
-	 * 
-	 * @param modifiedId
-	 */
-	public void setModifiedId(String modifiedId) {
-		this.modifiedId = modifiedId;
-	}
-
-	// ここからstate
-	/**
 	 * 社員IDを取得
 	 * 
-	 * @return employeeInfoId
+	 * @return employeeInfoId 社員ID
 	 */
-	public int getEmployeeInfoId() {
-		return employeeInfoId;
+	public int getCompanyId() {
+		return companyId;
 	}
 
 	/**
 	 * 社員IDを格納
 	 * 
-	 * @param employeeInfoId
+	 * @param employeeInfoId 社員ID
 	 */
-	public void setEmployeeInfoId(int employeeInfoId) {
-		this.employeeInfoId = employeeInfoId;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
 	/**
 	 * 所属会社IDを取得
 	 * 
-	 * @return companyInfoId
+	 * @return companyInfoId 所属会社ID
 	 */
 	public int getCompanyInfoId() {
 		return companyInfoId;
@@ -297,7 +195,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 所属会社IDを格納
 	 * 
-	 * @param companyInfoId
+	 * @param companyInfoId 所属会社ID
 	 */
 	public void setCompanyInfoId(int companyInfoId) {
 		this.companyInfoId = companyInfoId;
@@ -306,7 +204,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 担当管理営業を取得
 	 * 
-	 * @return businessManager
+	 * @return businessManager 担当管理営業
 	 */
 	public String getBusinessManager() {
 		return businessManager;
@@ -315,7 +213,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 担当管理営業を格納
 	 * 
-	 * @param businessManager
+	 * @param businessManager 担当管理営業
 	 */
 	public void setBusinessManager(String businessManager) {
 		this.businessManager = businessManager;
@@ -324,7 +222,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 事業部を取得
 	 * 
-	 * @return department
+	 * @return department 事業部
 	 */
 	public String getDepartment() {
 		return department;
@@ -333,7 +231,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 事業部を格納
 	 * 
-	 * @param department
+	 * @param department 事業部
 	 */
 	public void setDepartment(String department) {
 		this.department = department;
@@ -342,7 +240,7 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 稼働状況を取得
 	 * 
-	 * @return commissioningStatus
+	 * @return commissioningStatus 稼働状況
 	 */
 	public String getCommissioningStatus() {
 		return commissioningStatus;
@@ -351,52 +249,34 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 稼働状況を格納
 	 * 
-	 * @param commissioningStatus
+	 * @param commissioningStatus 稼働状況
 	 */
 	public void setCommissioningStatus(String commissioningStatus) {
 		this.commissioningStatus = commissioningStatus;
 	}
 
 	/**
-	 * ステータスを取得
-	 * 
-	 * @return status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * ステータスを格納
-	 * 
-	 * @param status
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	/**
 	 * 入社日を取得
 	 * 
-	 * @return hireDate
+	 * @return enterDate 入社日
 	 */
-	public String getHireDate() {
-		return hireDate;
+	public String getEnterDate() {
+		return enterDate;
 	}
 
 	/**
 	 * 入社日を格納
 	 * 
-	 * @param hireDate
+	 * @param enterDate 入社日
 	 */
-	public void setHireDate(String hireDate) {
-		this.hireDate = hireDate;
+	public void setEnterDate(String enterDate) {
+		this.enterDate = enterDate;
 	}
 
 	/**
 	 * 退職日を取得
 	 * 
-	 * @return retireDate
+	 * @return retireDate 退職日
 	 */
 	public String getRetireDate() {
 		return retireDate;
@@ -405,9 +285,28 @@ public class EmployeeInfoStateBean {
 	/**
 	 * 退職日を格納
 	 * 
-	 * @param retireDate
+	 * @param retireDate 退職日
 	 */
 	public void setRetireDate(String retireDate) {
 		this.retireDate = retireDate;
 	}
+
+	/**
+	 * ステータスを取得
+	 * 
+	 * @return status ステータス
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * ステータスを格納
+	 * 
+	 * @param status ステータス
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }

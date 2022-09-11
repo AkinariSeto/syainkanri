@@ -23,6 +23,9 @@ import dao.EmployeeListDao;
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 削除を実行するメソッド
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
@@ -33,18 +36,18 @@ public class DeleteServlet extends HttpServlet {
 		LoginInfoBean registerUser = (LoginInfoBean) session.getAttribute("loginInfo");
 		// セッションが切れている場合ログインページに遷移
 		if (registerUser == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
-		
+
 		// employeeIdのリクエストパラメーターを取得
-		String employeeId = request.getParameter("empId");
+		String empId = request.getParameter("empId");
 		EmployeeListDao employeeListDao = new EmployeeListDao();
 
 		try {
 			// employeeIdの削除を実行
-			employeeListDao.EmployeeInfoDelete(employeeId);
+			employeeListDao.employeeInfoDelete(empId);
 		} catch (Exception e) {
 			throw new ServletException(e.getMessage());
 		}

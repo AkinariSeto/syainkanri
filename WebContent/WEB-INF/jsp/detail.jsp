@@ -22,37 +22,37 @@
 	</div>
 
 	<!-- 新規登録、更新のフォーム -->
-	<form action="NewRegisterServlet" method="post" name="registerForm" onSubmit="return funcConfirm()">
+	<form action="detail" method="post" name="registerForm" onSubmit="return funcConfirm()">
 		<!-- employeeIdの情報を取得 -->
 		<input type="hidden" name="empId" value="${detailBean.employeeId}">
 		<!-- 氏名の情報を取得 -->
 		<div class="form_area">
-			<div class="form_top">
+			<div class="form_top form_detail">
 				<label for="name">氏名</label>
-				<input type="text" id="name" name="name" value="${detailBean.name}">
+				<input type="text" id="name" name="name" class="input_width" value="${detailBean.name}">
 			</div>
 		</div>
 		<!-- ふりがなの情報を取得 -->
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="name_hiragana">氏名(ひらがな)</label>
-				<input type="text" id="name_hiragana" name="nameHiragana" value="${detailBean.nameHiragana}">
+				<input type="text" id="name_hiragana" name="nameHiragana" class="input_width" value="${detailBean.nameHiragana}">
 			</div>
 		</div>
 		<!-- 生年月日の情報を取得 -->
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="birthday">生年月日</label>
-				<input type="text" id="birthday" name="birthday" value="${detailBean.birthday}">
+				<input type="text" id="birthday" name="birthday" class="input_width" value="${detailBean.birthday}">
 			</div>
 		</div>
 		<!-- 性別の情報を取得 -->
 		<div class="form_area">
 			<div class="form_detail">
 				<label>性別</label>
-				<c:forEach var="gender" items="${gender}">
-					<input type="radio" name="sex" value="${gender.getNum()}"<c:if test="${detailBean.sex == gender.getNum()}">checked</c:if>>
-					<c:out value="${gender.getLabel()}" />
+				<c:forEach var="sex" items="${sex}">
+					<input type="radio" name="sex" value="${sex.getNum()}"<c:if test="${detailBean.sex == sex.getNum()}">checked</c:if>>
+					<c:out value="${sex.getLabel()}" />
 				</c:forEach>
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="tel">電話番号</label>
-				<input type="tel" id="tel" name="telephoneNumber" value="${detailBean.telephoneNumber}">
+				<input type="tel" id="tel" name="telephoneNumber" class="input_width" value="${detailBean.telephoneNumber}">
 			</div>
 		</div>
 		<!-- 会社情報を取得 -->
@@ -88,18 +88,19 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="business_manager">担当管理営業</label>
-				<input type="text" id="business_manager" name="businessManager" value="${detailBean.businessManager}">
+				<input type="text" id="business_manager" name="businessManager" class="input_width" value="${detailBean.businessManager}">
 			</div>
 		</div>
 		<!-- 事業部を取得 -->
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="division">事業部</label>
-				<select name="department" id="division">
+				<select name="department">
 					<c:forEach var="dep" items="${dep}">
 						<option value="${dep.getNum()}"
 							<c:if test="${detailBean.department == dep.getNum()}">selected</c:if>>
-							<c:out value="${dep.getLabel()}" /></option>
+							<c:out value="${dep.getLabel()}" />
+						</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -118,21 +119,21 @@
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="hire_date">入社日</label>
-				<input type="text" id="hire_date" name="enterDate" value="${detailBean.hireDate}">
+				<input type="text" id="hire_date" name="enterDate" class="input_width" value="${detailBean.enterDate}">
 			</div>
 		</div>
 		<!-- 退職日を取得 -->
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="retire_date">退職日</label>
-				<input type="text" id="retire_date" name="retireDate" value="${detailBean.retireDate}">
+				<input type="text" id="retire_date" name="retireDate" class="input_width" value="${detailBean.retireDate}">
 			</div>
 		</div>
 		<!-- ステータスを取得 -->
 		<div class="form_area">
 			<div class="form_detail">
 				<label for="status">ステータス</label>
-				<select name="status" id="status">
+				<select name="status" id="status" class="status_width">
 					<c:forEach var="companyStatus" items="${companyStatus}">
 						<option value="${companyStatus.getNum()}"
 							<c:if test="${detailBean.status == companyStatus.getNum()}">selected</c:if>>

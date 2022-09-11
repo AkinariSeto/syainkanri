@@ -15,19 +15,24 @@ import dao.LoginDao;
 @WebServlet("/login")
 /**
  * 入力されたログインIDとパスワードがDBと一致するか判定するサーブレット
- * 
+ *
  * @author setoakinari
  *
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * ここからログイン画面へ遷移。
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		// ログイン画面に遷移
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 
+	/**
+	 * ログインID、パスワードを検索して一覧画面へ遷移。
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
@@ -52,12 +57,10 @@ public class LoginServlet extends HttpServlet {
 			// リクエストスコープにエラーメッセージを設定
 			request.setAttribute("message", "IDまたはパスワードが違います");
 			// ログイン画面に遷移
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 			return;
 		}
 
-		// ログインIDを設定
-		loginInfoBean.setLoginId(loginInfoBean.getLoginId());
 		// セッション生成
 		HttpSession session = request.getSession(true);
 		// ログイン情報をセッションに保存

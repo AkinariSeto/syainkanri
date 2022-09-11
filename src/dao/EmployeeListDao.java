@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,8 +11,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.sqlite.SQLiteConfig;
 
 import beans.CompanyInfoBean;
 import beans.ListInfoBean;
@@ -30,20 +27,18 @@ public class EmployeeListDao extends BaseDao {
 	ListInfoBean listInfoBean = null;
 
 	CompanyInfoBean companyInfoBean = null;
-	
+
 	/**
 	 * 検索した一覧情報をdetailListに返す
 	 *
-	 * @return detailList 社員ID、会社ID、事業部、名前、ふりがな、誕生日、担当管理営業、入社日、稼働状況
+	 * @return detailList 社員ID、会社ID、事業部、氏名、氏名(ふりがな)、生年月日、担当管理営業、入社日、稼働状況
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public List<ListInfoBean> EmployeeListInfo() throws SQLException, ClassNotFoundException {
-		
+	public List<ListInfoBean> employeeListInfo() throws SQLException, ClassNotFoundException {
+
 		List<ListInfoBean> detailList = new ArrayList<ListInfoBean>();
-		
-		// 事前準備
-		Class.forName(DRIVER_NAME);
+
 		// 社員一覧情報を取得するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT");
@@ -66,22 +61,15 @@ public class EmployeeListDao extends BaseDao {
 		sql.append(" employee_state.employee_info_id;");
 
 		try {
-			SQLiteConfig config = new SQLiteConfig();
-			// 外部キー制約を有効にする
-			config.enforceForeignKeys(true);
-			// Connectionを生成
-			conn = DriverManager.getConnection(URL, config.toProperties());
+			// DBへ接続
+			open();
 			// PreparedStatementを生成
 			pstmt = conn.prepareStatement(sql.toString());
 			// SQLを実行
 			rs = pstmt.executeQuery();
-			int num = 1;
 			// 一覧リストの出力方法を決める
 			while (rs.next()) {
 				listInfoBean = new ListInfoBean();
-				// listInfoBeanに通番をセット
-				listInfoBean.setNumber(num);
-				num++;
 				// listInfoBeanに社員IDをセット
 				listInfoBean.setEmployeeId(rs.getInt("employee_id"));
 				companyInfoBean = new CompanyInfoBean();
@@ -116,11 +104,11 @@ public class EmployeeListDao extends BaseDao {
 				listInfoBean.setBusinessManager(rs.getString("business_manager"));
 
 				// listInfoBeanに入社日をセット
-				String hireDate = rs.getString("hire_date");
+				String enterDate = rs.getString("hire_date");
 				SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date normalHireDate = sqlFormat.parse(hireDate);
-				String formatHireDate = new SimpleDateFormat("yyyy/MM/dd").format(normalHireDate);
-				listInfoBean.setHireDate(formatHireDate);
+				Date normalEnterDate = sqlFormat.parse(enterDate);
+				String formatEnterDate = new SimpleDateFormat("yyyy/MM/dd").format(normalEnterDate);
+				listInfoBean.setEnterDate(formatEnterDate);
 
 				// listInfoBeanに稼働状況をセット
 				listInfoBean.setCommissioningStatus(CommissioningStatusEnum.commissioningStatusName(rs.getString("commissioning_status")));
@@ -164,19 +152,17 @@ public class EmployeeListDao extends BaseDao {
 	}
 	/**
 	 * employee_info、employee_stateの会社IDをそれぞれ削除する
-	 * 
+	 *
 	 * @param employeeId 社員ID
-	 * @throws ClassNotFoundException 
-	 * 
+	 * @throws ClassNotFoundException
+	 *
 	 */
-	public void EmployeeInfoDelete(String employeeId) throws ClassNotFoundException {
+	public void employeeInfoDelete(String employeeId) throws ClassNotFoundException {
 
 		// PreparedStatementを初期化
 		PreparedStatement pstmtInfo = null;
 		PreparedStatement pstmtState = null;
 
-		// 事前準備
-		Class.forName(DRIVER_NAME);
 		// 主キーのIDを削除するSQL
 		StringBuilder deleteEmployeeInfo = new StringBuilder();
 		deleteEmployeeInfo.append("DELETE");
@@ -192,12 +178,10 @@ public class EmployeeListDao extends BaseDao {
 		deleteEmployeeState.append(" employee_state");
 		deleteEmployeeState.append(" WHERE");
 		deleteEmployeeState.append(" employee_info_id = ?");
+
 		try {
-			SQLiteConfig config = new SQLiteConfig();
-			// 外部キー制約を有効にする
-			config.enforceForeignKeys(true);
-			// Connectionを生成
-			conn = DriverManager.getConnection(URL, config.toProperties());
+			// DBへ接続
+			open();
 			// オートコミット機能を無効化
 			conn.setAutoCommit(false);
 			// 送信すべきSQL文の雛形
@@ -255,7 +239,7 @@ public class EmployeeListDao extends BaseDao {
 	}
 	/**
 	 * 検索した会社情報をcompanyInfoに返す
-	 * 
+	 *
 	 * @param companyId 会社ID
 	 * @return companyInfo 所属会社ID、会社名、略称
 	 * @throws SQLException
@@ -263,8 +247,7 @@ public class EmployeeListDao extends BaseDao {
 	 */
 	public CompanyInfoBean findCompanyInfo(String companyId) throws SQLException, ClassNotFoundException {
 		ResultSet companyRs = null;
-		// 事前準備
-		Class.forName(DRIVER_NAME);
+
 		// 会社情報Beanを初期化
 		CompanyInfoBean companyInfo = null;
 
@@ -280,11 +263,8 @@ public class EmployeeListDao extends BaseDao {
 		sql.append(" company_id = ?");
 
 		try {
-			SQLiteConfig config = new SQLiteConfig();
-			// 外部キー制約を有効にする
-			config.enforceForeignKeys(true);
-			// Connectionを生成
-			conn = DriverManager.getConnection(URL, config.toProperties());
+			// DBへ接続
+			open();
 			// PreparedStatementを生成
 			pstmt = conn.prepareStatement(sql.toString());
 			// 1番目のプレースホルダにパラメータを設定

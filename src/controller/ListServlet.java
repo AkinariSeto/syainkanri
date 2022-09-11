@@ -31,18 +31,20 @@ public class ListServlet extends HttpServlet {
 		doPost(request, response);
 	}
 
+	/**
+	 * 一覧画面表示用の情報を検索して、一覧画面へ遷移。
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// UTF-8にエンコーディング
 		request.setCharacterEncoding("UTF-8");
-
 		// セッションを生成
 		HttpSession session = request.getSession(true);
 		// ログイン情報をとってくる
 		LoginInfoBean registerUser = (LoginInfoBean) session.getAttribute("loginInfo");
 		// セッションが切れている場合ログインページに遷移
 		if (registerUser == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
@@ -51,13 +53,11 @@ public class ListServlet extends HttpServlet {
 		List<ListInfoBean> infoBeanList = new ArrayList<ListInfoBean>();
 		try {
 			// 一覧用の情報を検索
-			infoBeanList = employeeListDao.EmployeeListInfo();
+			infoBeanList = employeeListDao.employeeListInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// recordInsertedSuccessfullyを削除
-		session.removeAttribute("recordInsertedSuccessfully");
 		// 一覧用の情報をセッションに保存
 		session.setAttribute("InfoBeanList", infoBeanList);
 		// 一覧画面へ遷移

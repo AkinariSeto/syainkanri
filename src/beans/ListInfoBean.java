@@ -8,8 +8,6 @@ package beans;
  */
 public class ListInfoBean {
 
-	/** 通番 */
-	private int number;
 	/** 社員ID */
 	private int employeeId;
 	/** 所属会社ID */
@@ -25,27 +23,9 @@ public class ListInfoBean {
 	/** 担当管理営業 */
 	private String businessManager;
 	/** 入社日 */
-	private String hireDate;
+	private String enterDate;
 	/** 稼働状況 */
 	private String commissioningStatus;
-
-	/**
-	 * 通番を取得
-	 *
-	 * @return number 通番
-	 */
-	public int getNumber() {
-		return number;
-	}
-
-	/**
-	 * 通番を格納
-	 *
-	 * @param number 通番
-	 */
-	public void setNumber(int number) {
-		this.number = number;
-	}
 
 	/**
 	 * 社員IDを取得
@@ -176,19 +156,19 @@ public class ListInfoBean {
 	/**
 	 * 入社日を取得
 	 *
-	 * @return hireDate 入社日
+	 * @return enterDate 入社日
 	 */
-	public String getHireDate() {
-		return hireDate;
+	public String getEnterDate() {
+		return enterDate;
 	}
 
 	/**
 	 * 入社日を格納
 	 *
-	 * @param hireDate 入社日
+	 * @param enterDate 入社日
 	 */
-	public void setHireDate(String hireDate) {
-		this.hireDate = hireDate;
+	public void setEnterDate(String enterDate) {
+		this.enterDate = enterDate;
 	}
 
 	/**
